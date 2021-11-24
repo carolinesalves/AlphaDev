@@ -17,11 +17,11 @@ export class ProdutoService {
   ) { }
 
   cadastrar(produto: IProduto): Observable<IProduto>{
-    return this.http.post<IProduto>(`${API}/produto`, produto)
+    return this.http.post<IProduto>(`${API}/produtos`, produto)
   }
   
   buscarTodosProdutos(): Observable<Array<IProduto>>{
-    return this.http.get<[IProduto]>(`${API}/produto`,)
+    return this.http.get<[IProduto]>(`${API}/produtos`,)
   }
   
 }

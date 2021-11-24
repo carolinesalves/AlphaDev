@@ -51,7 +51,7 @@ export class AuthService {
   }
   entrar(usuario: string, senha:string): Observable<HttpResponse<any>> {
     return this.http.post(
-      `${API}/usuarios`,
+      `${API}/auth/usuario`,
       {
         usuario,
         senha,
@@ -66,7 +66,7 @@ export class AuthService {
   }
 
   cadastrar(user: User): Observable<User>{
-    return this.http.post<User>(`${API}/novoUsuario`, user)
+    return this.http.post<User>(`${API}/usuarios`, user)
   }
  
 }

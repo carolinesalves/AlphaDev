@@ -14,15 +14,15 @@ export class PedidoService {
   constructor(private http: HttpClient) { }
 
   gerarPedido(listaPedido: Array<IPedido>): Observable<IPedido>{
-    return this.http.post<IPedido>(`${API}/pedido`, listaPedido)
+    return this.http.post<IPedido>(`${API}/pedidos`, listaPedido)
   }
 
   buscarTodosPedido(): Observable<[IPedido]>{
-    return this.http.get<[IPedido]>(`${API}/pedido`,)
+    return this.http.get<[IPedido]>(`${API}/pedidos`,)
   }
 
   buscarUmPedido(idPedido: string): Observable<[IPedido]>{
-    return this.http.get<[IPedido]>(`${API}/pedido/${idPedido}`,)
+    return this.http.get<[IPedido]>(`${API}/pedidos/${idPedido}`,)
   }
 
 }

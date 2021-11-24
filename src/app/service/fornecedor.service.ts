@@ -17,10 +17,10 @@ export class FornecedorService {
 
 
   cadastrar(fornecedor: IFornecedor): Observable<IFornecedor>{
-    return this.http.post<IFornecedor>(`${API}/fornecedor`, fornecedor)
+    return this.http.post<IFornecedor>(`${API}/fornecedores`, fornecedor)
   }
   buscarTodosFornecedor(): Observable<[IFornecedor]>{
-    return this.http.get<[IFornecedor]>(`${API}/fornecedor`,)
+    return this.http.get<[IFornecedor]>(`${API}/fornecedores`,)
   }
   
 }
