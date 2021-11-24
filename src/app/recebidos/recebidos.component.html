@@ -1,0 +1,27 @@
+<div class="container-fluid" id="bg">
+  <div class="row d-flex align-items-center">
+    <div class="col-md-4" id="img-bg" style="margin-right: 20px;"></div>
+    <div class="col-md-7 mt-5 mb-5 fundoForm">
+      <div class="row d-flex justify-content-center">
+        <div class="col-md-10">
+          <h1 class="text-center">Lista de pedidos</h1>
+          <div class="col-md-12">
+            <app-tabela [data]="dadosDoPedido" [config]="listaDePedidos" (viewItem)="visualizarPedido($event)">
+            </app-tabela>
+          </div>
+        </div>
+        <hr>
+        <div class="col-md-12">
+          <h1 class="text-center">Lista de produtos do Pedido({{numeroPedido? numeroPedido : 'Nenhum pedido selecionado'}})</h1>
+          <div class="col-md-12">
+            <app-tabela [data]="dadosDosItens" [config]="listaDeProdutos" (confirmarItem)="confirmarItem($event)"></app-tabela>
+          </div>
+          <div class="col-md-12">
+            <button type="button" class="btn btn-success space" (click)='receberPedido()'>Receber pedido</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
