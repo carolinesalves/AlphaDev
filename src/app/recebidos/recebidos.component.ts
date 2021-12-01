@@ -92,38 +92,39 @@ export class RecebidosComponent implements OnInit {
 
     this.buscarTodosPedidos();
 
-    const listaTeste = [
-      {
-        id: 1,
-        fornecedor: 'Atacadão',
-        isViewItem: true,
-      },
-      {
-        id: 2,
-        fornecedor: 'Mercado',
-        isViewItem: true,
+    // const listaTeste = [
+    //   {
+    //     id: 1,
+    //     fornecedor: 'Atacadão',
+    //     isViewItem: true,
+    //   },
+    //   {
+    //     id: 2,
+    //     fornecedor: 'Mercado',
+    //     isViewItem: true,
 
-      },
-      {
-        id: 3,
-        fornecedor: 'Loja 1',
-        isViewItem: true,
+    //   },
+    //   {
+    //     id: 3,
+    //     fornecedor: 'Loja 1',
+    //     isViewItem: true,
 
-      },
-      {
-        id: 4,
-        fornecedor: 'Mergado 2',
-        isViewItem: true,
+    //   },
+    //   {
+    //     id: 4,
+    //     fornecedor: 'Mergado 2',
+    //     isViewItem: true,
 
-      },
-    ]
-    this.dadosDoPedido = DataTableItem.collection(listaTeste)
+    //   },
+    // ]
+    // this.dadosDoPedido = DataTableItem.collection(listaTeste)
   }
 
 
   buscarTodosPedidos(){
     this.pedidoService.buscarTodosPedido().subscribe((data)=>{
       if(Array.isArray(data) && data.length){
+        console.log('dados do pedido', data)
         this.dadosDoPedido = DataTableItem.collection(data)
       }
     }, error =>{
