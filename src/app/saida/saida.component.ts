@@ -21,7 +21,7 @@ export class SaidaComponent implements OnInit {
   dropdownSettingsMulti: any = {};
   closeDropdownSelection=false;
 
-  listaProduto!:{id:any, text:string}[]
+  listaProduto:{id:any, text:string}[]=[]
 
   constructor(
     private fb: FormBuilder,

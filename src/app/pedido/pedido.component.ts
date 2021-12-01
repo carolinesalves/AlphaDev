@@ -30,8 +30,8 @@ export class PedidoComponent implements OnInit {
     { id: 'MG', text: 'MG' },
     { id: 'UN', text: 'UN' },
   ]
-  listaProduto!:{id:any, text:string}[]
-  listaFornecedor!:{id:any, text:string}[]
+  listaProduto:{id:any, text:string}[]=[]
+  listaFornecedor:{id:any, text:string}[]=[]
 
   data: DataTableItem[];
   configTable: DataTableConfig;
