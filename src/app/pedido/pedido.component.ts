@@ -36,6 +36,10 @@ export class PedidoComponent implements OnInit {
   data: DataTableItem[];
   configTable: DataTableConfig;
   lista :Array<any> = []
+
+  visualizarProduto = false;
+  visualizerFornecedor = false;
+
   constructor(
     private fb: FormBuilder,
     private alert : ToastrService,
@@ -92,6 +96,7 @@ export class PedidoComponent implements OnInit {
 
   buscarTodosProdutos(){
     this.produtoService.buscarTodosProdutos().subscribe((data)=>{
+      this.visualizarProduto = false;
       if(data.length){
         console.log('Lista de produtos',data)
         data.forEach(produto => {
@@ -100,6 +105,9 @@ export class PedidoComponent implements OnInit {
             text: produto.nome
           }
           this.listaProduto.push(lista);
+          this.visualizarProduto = true;
+          console.log('Lista de produtos LISTADA',this.listaProduto)
+
         })
       }
     }, error =>{
@@ -110,6 +118,7 @@ export class PedidoComponent implements OnInit {
 
   buscarTodosFornecedor(){
     this.fornecedorService.buscarTodosFornecedor().subscribe((data)=>{
+      this.visualizerFornecedor = false;
       if(data.length){
         console.log('lista de fornecedor', data)
         data.forEach(fornecedor =>{
@@ -118,6 +127,9 @@ export class PedidoComponent implements OnInit {
             text: fornecedor.nomeFornecedor
           }
           this.listaFornecedor.push(lista);
+          this.visualizerFornecedor = true;
+          console.log('lista de fornecedor LISTADA', this.listaFornecedor)
+
         })
       }
     }, error =>{

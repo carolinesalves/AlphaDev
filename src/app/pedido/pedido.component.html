@@ -6,7 +6,7 @@
         <div class="col-md-12" >
           <h1 class="text-center marginTop">Cadastro de Pedido</h1>
           <form [formGroup]="formPedido">
-            <div class="form-group mt-3">
+            <div class="form-group mt-3" >
                 <label for="descricaoProduto">Selecione o Produto</label>
                 <ng-multiselect-dropdown
                   name='descricaoProduto'
@@ -14,6 +14,7 @@
                   [settings]="dropdownSettingsSigle"
                   [data]="listaProduto"
                   formControlName="descricaoProduto"
+                  [disabled]="visualizarProduto"
                 ></ng-multiselect-dropdown>
             </div>
             <div class="form-group mt-3">
@@ -24,6 +25,7 @@
                 [settings]="dropdownSettingsSigle"
                 [data]="listaFornecedor"
                 formControlName="fornecedor"
+                [disabled]="visualizerFornecedor"
               ></ng-multiselect-dropdown>
             </div>
             <div class="form-group mt-3">
