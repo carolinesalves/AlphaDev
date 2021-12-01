@@ -15,6 +15,7 @@
                   [data]="listaProduto"
                   formControlName="descricaoProduto"
                   [disabled]="visualizarProduto"
+                  [(ngModel)] = "listaProduto"
                 ></ng-multiselect-dropdown>
             </div>
             <div class="form-group mt-3">
@@ -26,6 +27,7 @@
                 [data]="listaFornecedor"
                 formControlName="fornecedor"
                 [disabled]="visualizerFornecedor"
+                [(ngModel)] = "listaFornecedor"
               ></ng-multiselect-dropdown>
             </div>
             <div class="form-group mt-3">
