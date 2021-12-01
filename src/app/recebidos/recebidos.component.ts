@@ -41,6 +41,7 @@ export class RecebidosComponent implements OnInit {
         type: 'text'
       }
     ], 'id');
+    
 
     this.listaDeProdutos = DataTableConfig.default([
       {
@@ -81,7 +82,7 @@ export class RecebidosComponent implements OnInit {
       
       
     ], 'id');
-    this.listaDeProdutos.isEditable = true;
+    this.listaDeProdutos.isEditable = false;
     this.listaDeProdutos.isDeletable = false;
   }
 
@@ -135,6 +136,7 @@ export class RecebidosComponent implements OnInit {
     this.numeroPedido = pedido.id
     this.pedidoService.buscarUmPedido(`${this.numeroPedido}`).subscribe((data)=>{
       if(Array.isArray(data) && data.length){
+        console.log('buscar produtos do pedido', data)
         this.item = data;
         this.dadosDosItens = DataTableItem.collection(data)
       }
@@ -142,41 +144,41 @@ export class RecebidosComponent implements OnInit {
       console.warn('error', error)
       this.alert.error('Tente novamente','Falha')
     })
-    const itemTeste = [
-      {
-        id: 1,
-        descricaoProduto: 'Arroz',
-        fornecedor: 'Camil',
-        quantidade: 20,
-        unidadeMedida: 'KG',
-        DataDeValidade: '',
-        quantidadeRecebida:'',
-        isConfirmItem:true,
-      },
-      {
-        id: 2,
-        descricaoProduto: 'Feijão',
-        fornecedor: 'Kicaldo',
-        quantidade: 20,
-        unidadeMedida: 'KG',
-        DataDeValidade: '',
-        quantidadeRecebida:'',
-        isConfirmItem:true,
+    // const itemTeste = [
+    //   {
+    //     id: 1,
+    //     descricaoProduto: 'Arroz',
+    //     fornecedor: 'Camil',
+    //     quantidade: 20,
+    //     unidadeMedida: 'KG',
+    //     DataDeValidade: '',
+    //     quantidadeRecebida:'',
+    //     // isConfirmItem:false,
+    //   },
+    //   {
+    //     id: 2,
+    //     descricaoProduto: 'Feijão',
+    //     fornecedor: 'Kicaldo',
+    //     quantidade: 20,
+    //     unidadeMedida: 'KG',
+    //     DataDeValidade: '',
+    //     quantidadeRecebida:'',
+    //     // isConfirmItem:false,
 
-      },
-      {
-        id: 3,
-        descricaoProduto: 'Nori Alga Marinha',
-        fornecedor: 'Sidchen',
-        quantidade: 20,
-        unidadeMedida: 'UN',
-        DataDeValidade: '',
-        quantidadeRecebida:'',
-        isConfirmItem:true,
+    //   },
+    //   {
+    //     id: 3,
+    //     descricaoProduto: 'Nori Alga Marinha',
+    //     fornecedor: 'Sidchen',
+    //     quantidade: 20,
+    //     unidadeMedida: 'UN',
+    //     DataDeValidade: '',
+    //     quantidadeRecebida:'',
+    //     // isConfirmItem:false,
 
-      },
-    ]
-    this.dadosDosItens = DataTableItem.collection(itemTeste)
+    //   },
+    // ]
+    // this.dadosDosItens = DataTableItem.collection(itemTeste)
   }
 
   receberPedido() {

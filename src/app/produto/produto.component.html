@@ -8,7 +8,7 @@
                     <form [formGroup]="formProduto">
                         <div class="form-group mt-3">
                             <label for="nome">Nome do produto</label>
-                            <input class="form-control" type="text" name="nome" id="nome" placeholder="Digite o nome do produto" formControlName="nomeProduto">
+                            <input class="form-control" type="text" name="nome" id="nome" placeholder="Digite o nome do produto" formControlName="nome">
                         </div>
                         <div class="form-group mt-3">
                             <label for="descricao">Descrição do produto</label>
@@ -16,7 +16,7 @@
                         </div>
                         <div class="form-group mt-3">
                             <label for="qtdminima">Quantidade mínima</label>
-                            <input  class="form-control" type="number" name="qtdminima" id="qtdminima" min="1" formControlName="quantidadeMinima" >
+                            <input  class="form-control" type="number" name="qtdminima" id="qtdminima" min="1" formControlName="quantidade" >
                         </div>
                         <div class="d-flex justify-content-center">
                             <button type="submit" class="btn btn-danger space" routerLink='/home'>Cancelar</button>

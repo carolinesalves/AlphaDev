@@ -92,13 +92,16 @@ export class PedidoComponent implements OnInit {
 
   buscarTodosProdutos(){
     this.produtoService.buscarTodosProdutos().subscribe((data)=>{
-      data.forEach(produto => {
-        const lista: {id:any, text:string} ={
-          id: produto.id,
-          text: produto.nomeProduto
-        }
-        this.listaProduto.push(lista);
-      })
+      if(data.length){
+        console.log('Lista de produtos',data)
+        data.forEach(produto => {
+          const lista: {id:any, text:string} ={
+            id: produto.id,
+            text: produto.nome
+          }
+          this.listaProduto.push(lista);
+        })
+      }
     }, error =>{
       console.warn('error', error)
       this.alert.error('Tente novamente','Falha')
@@ -107,13 +110,16 @@ export class PedidoComponent implements OnInit {
 
   buscarTodosFornecedor(){
     this.fornecedorService.buscarTodosFornecedor().subscribe((data)=>{
-      data.forEach(fornecedor =>{
-        const lista: {id:any, text:string} ={
-          id: fornecedor.id,
-          text: fornecedor.nomeFornecedor
-        }
-        this.listaFornecedor.push(lista);
-      })
+      if(data.length){
+        console.log('lista de fornecedor', data)
+        data.forEach(fornecedor =>{
+          const lista: {id:any, text:string} ={
+            id: fornecedor.id,
+            text: fornecedor.nomeFornecedor
+          }
+          this.listaFornecedor.push(lista);
+        })
+      }
     }, error =>{
       console.warn('error', error)
       this.alert.error('Tente novamente','Falha')

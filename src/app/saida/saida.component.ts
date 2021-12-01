@@ -69,13 +69,16 @@ export class SaidaComponent implements OnInit {
 
   buscarTodosProdutos(){
     this.produtoService.buscarTodosProdutos().subscribe((data)=>{
-      data.forEach(produto => {
-        const lista: {id:any, text:string} ={
-          id: produto.id,
-          text: produto.nomeProduto
-        }
-        this.listaProduto.push(lista);
-      })
+      if(data.length){
+        data.forEach(produto => {
+          const lista: {id:any, text:string} ={
+            id: produto.id,
+            text: produto.nome
+          }
+          this.listaProduto.push(lista);
+        })
+
+      }
     }, error =>{
       console.warn('error', error)
       this.alert.error('Tente novamente','Falha')

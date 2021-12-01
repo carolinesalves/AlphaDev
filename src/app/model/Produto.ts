@@ -1,6 +1,6 @@
 export interface IProduto{
     id?:number,
-    nomeProduto: string,
+    nome: string,
     descricao: string,
-    quantidadeMinima: number,
+    quantidade: number,
 }
