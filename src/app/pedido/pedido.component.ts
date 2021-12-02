@@ -33,7 +33,7 @@ export class PedidoComponent implements OnInit {
   listaProduto:{id:any, text:string}[]=[]
   listaFornecedor:{id:any, text:string}[]=[]
 
-  data: DataTableItem[];
+  dataItem: DataTableItem[];
   configTable: DataTableConfig;
   lista :Array<any> = []
   constructor(
@@ -130,7 +130,7 @@ export class PedidoComponent implements OnInit {
     })
   }
   atualizarListaTabela(){
-    this.data = DataTableItem.collection(this.lista);
+    this.dataItem = DataTableItem.collection(this.lista);
   }
 
   adicionar(): void{

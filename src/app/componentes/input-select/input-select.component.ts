@@ -1,5 +1,5 @@
-import { Component, Input, forwardRef, OnInit } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { Component, forwardRef, Input, OnInit, Optional, Host, SkipSelf } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR, ControlContainer, AbstractControl } from '@angular/forms';
 
 const INPUT_FIELD_VALUE_ACCESSOR: any = {
   provide: NG_VALUE_ACCESSOR,
@@ -15,22 +15,16 @@ const INPUT_FIELD_VALUE_ACCESSOR: any = {
 
 })
 export class InputSelectComponent implements ControlValueAccessor, OnInit {
-
-  constructor() { }
-
-  @Input() classeCss: any;
-  @Input() id: string;
-  @Input() cssLabel = '';
   @Input() label: string;
-  @Input() isReadOnly = false;
-  @Input() data: { id: string, text: string, sigla?: string }[];
   @Input() multiple: string;
-  @Input() placeholder: string;
-  @Input() settings: any = {}
+  @Input() data: { id: string, text: string, sigla?: string }[];
+  @Input() formControlName: string;
   @Input() isDisabled = false;
-
-  closeDropdownSelection=false;
-
+  @Input() selectAll = true;
+  _value = [];
+  @Input() settings: any;
+  @Input() placeholder: string;
+  public control: AbstractControl | any;
 
   get options(): { id: string, text: string }[] {
     if (!this.data) {
@@ -39,52 +33,64 @@ export class InputSelectComponent implements ControlValueAccessor, OnInit {
     return this.data;
   }
 
-  private innerValue: any;
-
   get value() {
-    return this.innerValue;
+    return this._value;
   }
 
-  set value(v: any) {
-    if (v !== this.innerValue) {
-      this.innerValue = v;
-      this.onChangeCb(v);
+  set value(val) {
+    if (typeof val === 'string') {
+      val = [];
     }
+    this._value = val;
+    this.propagateChange(this._value);
   }
+
+
+  constructor(@Optional() @Host() @SkipSelf() private controlContainer: ControlContainer) { }
 
   ngOnInit() {
     const isSingleSelection = this.multiple === 'true' ? false : true;
-
-    this.configuracaoDoCampoSelect(isSingleSelection)
-  }
-
-  configuracaoDoCampoSelect(isSingleSelection:boolean){
     this.settings = {
       singleSelection: isSingleSelection,
-      selectAllText: 'Select All',
-      unSelectAllText: 'UnSelect All',
+      idField: 'id',
+      textField: 'text',
+      selectAllText: 'Selecionar todos',
+      unSelectAllText: 'Desmarcar todos',
+      enableCheckAll: this.selectAll,
+      itemsShowLimit: 3,
       allowSearchFilter: true,
-      closeDropDownOnSelection: this.closeDropdownSelection
+      closeDropDownOnSelection: false
     };
+    if (this.controlContainer) {
+      if (this.formControlName) {
+        this.control = this.controlContainer.control.get(this.formControlName);
+        const self = this;
+        setTimeout(() => {
+          self.control.markAsPristine();
+        }, 1);
+      }
+    }
   }
 
-  onChangeCb: (_: any) => void = () => {};
-  onTouchedCb: (_: any) => void = () => {};
+  writeValue(value: any) {
+    if (value !== undefined) {
+      this.value = value;
+    }
+  }
+  // onItemSelect(fn: any) {
+  //   console.log("---------> DO FORM " + fn);
+  //   this.propagateChange(fn);
+  // }
 
-  writeValue(v: any): void {
-    this.value = v;
+
+
+  propagateChange = (_: any) => { };
+
+  registerOnChange(fn:any) {
+    this.propagateChange = fn;
   }
 
-  registerOnChange(fn: any): void {
-    this.onChangeCb = fn;
-  }
 
-  registerOnTouched(fn: any): void {
-    this.onTouchedCb = fn;
-  }
-
-  setDisabledState?(isDisabled: boolean): void {
-    this.isReadOnly = isDisabled;
-  }
+  registerOnTouched() {}
 
 }

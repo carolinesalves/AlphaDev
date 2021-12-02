@@ -48,7 +48,7 @@
           </form>
         </div>
         <div class="col-md-12" >
-          <app-tabela [data]="data" [config]="configTable" (deleteItem)="deletarItem($event)"></app-tabela>
+          <app-tabela [data]="dataItem" [config]="configTable" (deleteItem)="deletarItem($event)"></app-tabela>
         </div>
         <div class="col-md-12" >
           <button type="button" class="btn btn-success space" (click)='salvar()'>Salvar</button>
