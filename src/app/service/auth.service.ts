@@ -51,7 +51,7 @@ export class AuthService {
   }
   entrar(usuario: string, senha:string): Observable<HttpResponse<any>> {
     return this.http.post(
-      `${API}/auth/usuario`,
+      `${API}/usuario/auth`,
       {
         usuario,
         senha,

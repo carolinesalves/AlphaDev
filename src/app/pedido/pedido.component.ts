@@ -128,6 +128,7 @@ export class PedidoComponent implements OnInit {
       this.alert.error('Tente novamente','Falha')
     })
   }
+
   atualizarListaTabela(){
     this.dataItem = DataTableItem.collection(this.lista);
   }
@@ -143,8 +144,8 @@ export class PedidoComponent implements OnInit {
   tratarCampos() : IPedido{
     const form = this.formPedido.getRawValue();
     const body :IPedido ={
-      descricaoProduto: form.descricaoProduto && form.descricaoProduto.length ? form.descricaoProduto[0].text :'',
-      fornecedor: form.fornecedor && form.fornecedor.length ? form.fornecedor[0].text : '',
+      produto: form.descricaoProduto && form.descricaoProduto.length ? form.descricaoProduto[0].id :'',
+      fornecedor: form.fornecedor && form.fornecedor.length ? form.fornecedor[0].id : '',
       quantidade: form.quantidade ?? 0,
       unidadeMedida: form.unidadeMedida && form.unidadeMedida.length ? form.unidadeMedida[0].text : '',
       isViewItem: false,
