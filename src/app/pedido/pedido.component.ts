@@ -93,15 +93,14 @@ export class PedidoComponent implements OnInit {
   buscarTodosProdutos(){
     this.produtoService.buscarTodosProdutos().subscribe((data)=>{
       if(data.length){
-        console.log('Lista de produtos',data)
         data.forEach(produto => {
-          const lista: {id:any, text:string} ={
-            id: produto.id,
-            text: produto.nome
+          if(produto && produto.nome){
+            const lista: {id:any, text:string} ={
+              id: produto.id,
+              text: produto.nome
+            }
+            this.listaProduto.push(lista);
           }
-          this.listaProduto.push(lista);
-          console.log('Lista de produtos LISTADA',this.listaProduto)
-
         })
       }
     }, error =>{
@@ -113,14 +112,14 @@ export class PedidoComponent implements OnInit {
   buscarTodosFornecedor(){
     this.fornecedorService.buscarTodosFornecedor().subscribe((data)=>{
       if(data.length){
-        console.log('lista de fornecedor', data)
         data.forEach(fornecedor =>{
-          const lista: {id:any, text:string} ={
-            id: fornecedor.id,
-            text: fornecedor.nomeFornecedor
+          if (fornecedor && fornecedor.nomeFornecedor){
+            const lista: {id:any, text:string} ={
+              id: fornecedor.id,
+              text: fornecedor.nomeFornecedor
+            }
+            this.listaFornecedor.push(lista);
           }
-          this.listaFornecedor.push(lista);
-          console.log('lista de fornecedor LISTADA', this.listaFornecedor)
 
         })
       }
@@ -143,7 +142,6 @@ export class PedidoComponent implements OnInit {
 
   tratarCampos() : IPedido{
     const form = this.formPedido.getRawValue();
-    console.log('form', form)
     const body :IPedido ={
       descricaoProduto: form.descricaoProduto && form.descricaoProduto.length ? form.descricaoProduto[0].text :'',
       fornecedor: form.fornecedor && form.fornecedor.length ? form.fornecedor[0].text : '',
@@ -181,7 +179,6 @@ export class PedidoComponent implements OnInit {
   salvar(){
     const body = this.lista
     this.pedidoService.gerarPedido(body).subscribe((data)=>{
-      console.log('data',data)
       this.formPedido.reset();
       this.alert.success('Pedido Gerado','Sucesso!')
     }, error =>{

@@ -71,11 +71,13 @@ export class SaidaComponent implements OnInit {
     this.produtoService.buscarTodosProdutos().subscribe((data)=>{
       if(data.length){
         data.forEach(produto => {
-          const lista: {id:any, text:string} ={
-            id: produto.id,
-            text: produto.nome
+          if(produto && produto.nome){
+            const lista: {id:any, text:string} ={
+              id: produto.id,
+              text: produto.nome
+            }
+            this.listaProduto.push(lista);
           }
-          this.listaProduto.push(lista);
         })
 
       }
