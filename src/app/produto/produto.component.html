@@ -7,7 +7,7 @@
                     <h1 class="text-center">Cadastro de Produto</h1>
                     <form [formGroup]="formProduto">
                         <div class="form-group mt-3">
-                            <label for="nome">Nome do produto</label>
+                            <label for="nome">Nome do produto *</label>
                             <input class="form-control" type="text" name="nome" id="nome" placeholder="Digite o nome do produto" formControlName="nome">
                         </div>
                         <div class="form-group mt-3">
@@ -15,12 +15,15 @@
                             <textarea  class="form-control" type="text" name="descricao" id="descricao" placeholder="Digite a descrição do produto" formControlName="descricao"></textarea>
                         </div>
                         <div class="form-group mt-3">
-                            <label for="qtdminima">Quantidade mínima</label>
+                            <label for="qtdminima">Quantidade mínima *</label>
                             <input  class="form-control" type="number" name="qtdminima" id="qtdminima" min="1" formControlName="quantidade" >
+                        </div>
+                        <div class="form-group mt-3">
+                            <small>* campos obrigatórios</small>
                         </div>
                         <div class="d-flex justify-content-center">
                             <button type="submit" class="btn btn-danger space" routerLink='/home'>Cancelar</button>
-                            <button type="submit" class="btn btn-success space" (click)='cadastrar()'>Cadastrar</button>
+                            <button type="submit" class="btn btn-success space" (click)='cadastrar()' [disabled]="formProduto.invalid">Cadastrar</button>
                         </div>
                     </form>
                 </div>

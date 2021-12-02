@@ -12,9 +12,9 @@ import { ProdutoService } from '../service/produto.service'
 export class ProdutoComponent implements OnInit {
   formProduto : FormGroup;
   formFields : Record<string, unknown> ={
-    nome: [null],
+    nome: [null,Validators.required],
     descricao:[null],
-    quantidade:[null],
+    quantidade:[null, Validators.required],
   }
 
   constructor(

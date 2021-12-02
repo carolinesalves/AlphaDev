@@ -6,7 +6,7 @@
                 <div class="col-md-10">
                     <h1 class="text-center">Saída de Estoque</h1>
                     <form [formGroup]="formSaida">
-                        <div class="form-group mt-3">
+                        <div class="form-group mt-3" *ngIf="listaProduto.length > 0">
                             <label for="descricaoProduto">Selecione o Produto</label>
                             <ng-multiselect-dropdown
                               name='descricaoProduto'

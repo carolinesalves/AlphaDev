@@ -12,8 +12,8 @@ import { ToastrService } from 'ngx-toastr';
 export class FornecedorComponent implements OnInit {
   formFornecedor : FormGroup;
   formFields : Record<string, unknown> ={
-    nomeFornecedor: [null],
-    cnpj:[null],
+    nomeFornecedor: [null,Validators.required],
+    cnpj:[null,Validators.required],
     inscricaoEsdadual:[null],
     observacao:[null],
 

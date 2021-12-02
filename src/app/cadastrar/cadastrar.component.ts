@@ -17,11 +17,11 @@ export class CadastrarComponent implements OnInit {
   confirmarSenha: string
   formUsuario : FormGroup;
   formFields : Record<string, unknown> ={
-    nome: [null],
+    nome: [null, Validators.required],
     sobrenome:[null],
-    usuario:[null],
-    senha:[null],
-    confirmeSenha:[null],
+    usuario:[null, Validators.required],
+    senha:[null, Validators.required],
+    confirmeSenha:[null, Validators.required],
   }
 
   constructor(
