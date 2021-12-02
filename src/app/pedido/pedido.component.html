@@ -6,17 +6,16 @@
         <div class="col-md-12" >
           <h1 class="text-center marginTop">Cadastro de Pedido</h1>
           <form [formGroup]="formPedido">
-            <div class="form-group mt-3" >
-                <label for="descricaoProduto">Selecione o Produto</label>
-                <ng-multiselect-dropdown
+            <div class="form-group mt-3">
+              <app-input-select label="Selecione o Produto" [data]="listaProduto" [placeholder]="'Selecione o produto'" formControlName="descricaoProduto" ></app-input-select>
+              <!-- <label for="descricaoProduto">Selecione o Produto</label> -->
+                <!-- <ng-multiselect-dropdown
                   name='descricaoProduto'
                   [placeholder]="'Selecione o produto'"
                   [settings]="dropdownSettingsSigle"
                   [data]="listaProduto"
                   formControlName="descricaoProduto"
-                  [disabled]="visualizarProduto"
-                  [(ngModel)] = "listaProduto"
-                ></ng-multiselect-dropdown>
+                ></ng-multiselect-dropdown> -->
             </div>
             <div class="form-group mt-3">
               <label for="fornecedor">Seleciona um fornecedor</label>
@@ -26,8 +25,6 @@
                 [settings]="dropdownSettingsSigle"
                 [data]="listaFornecedor"
                 formControlName="fornecedor"
-                [disabled]="visualizerFornecedor"
-                [(ngModel)] = "listaFornecedor"
               ></ng-multiselect-dropdown>
             </div>
             <div class="form-group mt-3">

@@ -1,0 +1,5 @@
+<div class="form-group" [ngClass]="classeCss">
+  <label [attr.for]="id" [ngClass]="cssLabel">{{ label }}</label>
+  <ng-multiselect-dropdown [id]="id" [data]="options" [settings]="settings" [placeholder]="placeholder" [(ngModel)]="value" class="input-select" [disabled]="isDisabled">
+  </ng-multiselect-dropdown>
+</div>
