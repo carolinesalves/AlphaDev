@@ -30,7 +30,6 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { InputFieldComponent } from './componentes/input-field/input-field.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import { InputSelectComponent } from './componentes/input-select/input-select.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +45,6 @@ import { InputSelectComponent } from './componentes/input-select/input-select.co
     TabelaComponent,
     EstoqueComponent,
     InputFieldComponent,
-    InputSelectComponent,
   ],
   imports: [
     BrowserModule,
