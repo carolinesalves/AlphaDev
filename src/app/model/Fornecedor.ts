@@ -1,7 +1,7 @@
 export interface IFornecedor {
     id?:number,
-    nomeFornecedor?: string,
-    cnpj?: string,
-    inscricaoEsdadual?:string,
-    observacao?:string,
+    nomeFornecedor: string,
+    cnpj: string,
+    inscricaoEstadual:string,
+    observacao:string,
 }
