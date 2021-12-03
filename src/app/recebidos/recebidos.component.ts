@@ -125,7 +125,17 @@ export class RecebidosComponent implements OnInit {
     this.pedidoService.buscarTodosPedido().subscribe((data)=>{
       if(Array.isArray(data) && data.length){
         console.log('dados do pedido', data)
-        this.dadosDoPedido = DataTableItem.collection(data)
+        if(data.length > 0 ){
+          data.forEach(pedido => {
+            const dadosPedido ={
+              id: pedido.id,
+              fornecedor: pedido?.fornecedor?.nomeFornecedor,
+              isViewItem: true,
+            }
+            this.dadosDoPedido = DataTableItem.collection([dadosPedido])
+          
+          });
+        }
       }
     }, error =>{
       console.warn('error', error)

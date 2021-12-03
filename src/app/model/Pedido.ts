@@ -1,7 +1,7 @@
 export interface IPedido {
   id?:number,
   produto?: number,
-  fornecedor?: number,
+  fornecedor?: number | any,
   quantidade?: number | string,
   unidadeMedida?: string,
   isEditable?: boolean;
