@@ -83,6 +83,7 @@ export class EstoqueComponent implements OnInit {
       if(Array.isArray(data) && data.length){
         const produtosEstoque:any[] =[]
         data.forEach((e)=>{
+          console.log('es',e)
           const item ={
             id : e.id,
             descricaoProduto: e.produto?.nome,

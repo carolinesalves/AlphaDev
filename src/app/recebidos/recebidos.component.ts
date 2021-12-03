@@ -148,7 +148,6 @@ export class RecebidosComponent implements OnInit {
   }
 
   visualizarPedido(pedido: any) {
-    console.log('visualizarPedido' ,pedido)
     this.numeroPedido = pedido.id
     const pedidoSelecionado = this.todosPedidos.filter((e)=> e.id === pedido.id)
     const items = {
@@ -161,7 +160,8 @@ export class RecebidosComponent implements OnInit {
       quantidadeRecebida:'',
     }
     this.item = [items];
-    this.dadosDosItens = DataTableItem.collection(this.item )
+    console.log('visualizarPedido',this.item )
+    this.dadosDosItens = DataTableItem.collection(this.item)
 
     // this.pedidoService.buscarUmPedido(`${this.numeroPedido}`).subscribe((data)=>{
     //   if(Array.isArray(data) && data.length){
