@@ -14,7 +14,7 @@ export class EstoqueService {
 
   constructor(private http: HttpClient) { }
 
-  buscarEstoque(): Observable<Array<IProduto>>{
+  buscarEstoque(): Observable<Array<IPedido>>{
     return this.http.get<[IProduto]>(`${API}/estoque`,)
   }
 

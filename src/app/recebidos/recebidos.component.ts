@@ -19,6 +19,8 @@ export class RecebidosComponent implements OnInit {
   listaDeProdutos: DataTableConfig;
   dadosDosItens: DataTableItem[];
 
+  todosPedidos : IPedido[];
+
   numeroPedido = '';
   item :IPedido[];
 
@@ -126,6 +128,7 @@ export class RecebidosComponent implements OnInit {
       if(Array.isArray(data) && data.length){
         console.log('dados do pedido', data)
         if(data.length > 0 ){
+          this.todosPedidos = data;
           const pedidos : any[]=[];
           data.forEach(pedido => {
             const dadosPedido ={
@@ -147,16 +150,29 @@ export class RecebidosComponent implements OnInit {
   visualizarPedido(pedido: any) {
     console.log('visualizarPedido' ,pedido)
     this.numeroPedido = pedido.id
-    this.pedidoService.buscarUmPedido(`${this.numeroPedido}`).subscribe((data)=>{
-      if(Array.isArray(data) && data.length){
-        console.log('buscar produtos do pedido', data)
-        this.item = data;
-        this.dadosDosItens = DataTableItem.collection(data)
-      }
-    }, error =>{
-      console.warn('error', error)
-      this.alert.error('Tente novamente','Falha')
-    })
+    const pedidoSelecionado = this.todosPedidos.filter((e)=> e.id === pedido.id)
+    const items = {
+      id: pedidoSelecionado[0]?.produto?.id,
+      descricaoProduto: pedidoSelecionado[0]?.produto?.nome,
+      fornecedor: pedidoSelecionado[0]?.fornecedor?.nomeFornecedor,
+      quantidade: pedidoSelecionado[0]?.quantidade,
+      unidadeMedida: pedidoSelecionado[0]?.unidadeMedida,
+      DataDeValidade: '',
+      quantidadeRecebida:'',
+    }
+    this.item = [items];
+    this.dadosDosItens = DataTableItem.collection(this.item )
+
+    // this.pedidoService.buscarUmPedido(`${this.numeroPedido}`).subscribe((data)=>{
+    //   if(Array.isArray(data) && data.length){
+    //     console.log('buscar produtos do pedido', data)
+    //     this.item = data;
+    //     this.dadosDosItens = DataTableItem.collection(data)
+    //   }
+    // }, error =>{
+    //   console.warn('error', error)
+    //   this.alert.error('Tente novamente','Falha')
+    // })
     // const itemTeste = [
     //   {
     //     id: 1,

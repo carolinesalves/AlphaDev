@@ -1,7 +1,9 @@
+import { IProduto } from './Produto';
+import { IFornecedor } from './Fornecedor';
 export interface IPedido {
   id?:number,
-  produto?: number,
-  fornecedor?: number | any,
+  produto?: number | IProduto | [IProduto] | any,
+  fornecedor?: number | IFornecedor | [IFornecedor] | any,
   quantidade?: number | string,
   unidadeMedida?: string,
   isEditable?: boolean;
@@ -13,4 +15,5 @@ export interface IPedido {
   isSelectable?: boolean;
   showStatus?: boolean;
   enableAgenda?: boolean;
+  unidade?:string
 }

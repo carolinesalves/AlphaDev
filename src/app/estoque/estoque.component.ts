@@ -1,7 +1,7 @@
 import { EstoqueService } from './../service/estoque.service';
 import { ToastrService } from 'ngx-toastr';
 import { DataTableItem, DataTableConfig } from './../componentes/tabela/tabela.component';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgModule } from '@angular/core';
 
 @Component({
   selector: 'app-estoque',
@@ -81,7 +81,18 @@ export class EstoqueComponent implements OnInit {
     this.estoqueService.buscarEstoque().subscribe((data)=>{
       console.log('estoque', data)
       if(Array.isArray(data) && data.length){
-        this.dadosDosItens = DataTableItem.collection(data)
+        const produtosEstoque:any[] =[]
+        data.forEach((e)=>{
+          const item ={
+            id : e.id,
+            descricaoProduto: e.produto?.nome,
+            fornecedor: e.fornecedor?.nomeFornecedor,
+            quantidade: e.quantidade,
+            unidadeMedida: e.unidade
+          }
+          produtosEstoque.push(item)
+        })
+        this.dadosDosItens = DataTableItem.collection(produtosEstoque)
       }
     },error =>{
       console.warn('error', error)
