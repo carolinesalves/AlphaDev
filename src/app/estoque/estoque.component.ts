@@ -79,6 +79,7 @@ export class EstoqueComponent implements OnInit {
 
   buscarEstoque(){
     this.estoqueService.buscarEstoque().subscribe((data)=>{
+      console.log('estoque', data)
       if(Array.isArray(data) && data.length){
         this.dadosDosItens = DataTableItem.collection(data)
       }

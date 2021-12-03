@@ -126,15 +126,16 @@ export class RecebidosComponent implements OnInit {
       if(Array.isArray(data) && data.length){
         console.log('dados do pedido', data)
         if(data.length > 0 ){
+          const pedidos : any[]=[];
           data.forEach(pedido => {
             const dadosPedido ={
               id: pedido.id,
               fornecedor: pedido?.fornecedor?.nomeFornecedor,
               isViewItem: true,
             }
-            this.dadosDoPedido = DataTableItem.collection([dadosPedido])
-          
+            pedidos.push(dadosPedido)
           });
+          this.dadosDoPedido = DataTableItem.collection(pedidos)
         }
       }
     }, error =>{
@@ -144,6 +145,7 @@ export class RecebidosComponent implements OnInit {
   }
 
   visualizarPedido(pedido: any) {
+    console.log('visualizarPedido' ,pedido)
     this.numeroPedido = pedido.id
     this.pedidoService.buscarUmPedido(`${this.numeroPedido}`).subscribe((data)=>{
       if(Array.isArray(data) && data.length){
