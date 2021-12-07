@@ -37,8 +37,10 @@ export class EntrarComponent implements OnInit {
     }
     this.auth.entrar(this.userLogin.usuario as string, this.userLogin.senha as string).subscribe((resp: any)=>{
       console.log('auth ', resp)
-      this.router.navigate(['/home'])
-      this.alert.success('Bem Vindo','Sucesso')
+      if(resp){
+        this.router.navigate(['/home'])
+        this.alert.success('Bem Vindo','Sucesso')
+      }
     }, erro =>{
       console.warn('erro',erro)
       this.alert.error('Usuário ou senha estão incorretos!','Falha')

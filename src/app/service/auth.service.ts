@@ -2,7 +2,7 @@ import { environment } from './../../environments/environment';
 import { IUser } from './../model/User';
 import { TokenService } from './../autenticacao/token.service';
 import { HttpClient, HttpParams, HttpResponse } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { BehaviorSubject, Observable, } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { User } from '../model/User';
@@ -16,6 +16,9 @@ const API = environment.apiURL;
 export class AuthService {
 
   private usuarioSubject = new BehaviorSubject<IUser>({}) 
+
+  mostrarMenuEmitter = new EventEmitter<boolean>()
+  userEmitter = new EventEmitter<IUser>()
 
   constructor(
     private http: HttpClient,
@@ -56,12 +59,19 @@ export class AuthService {
     return this.http.get(
       `${API}/usuarios/auth`,{params}
       ).pipe(
-        tap(x => console.log('get ',x))
-        // tap((res)=>{
-        //   console.log('resosta ', res),
-        //   // const authToken = res.headers.get('x-access-token') ?? '';
-        //   // this.salvaToken(authToken);
-        // })
+        // tap(x => console.log('get ',x))
+        tap((res)=>{
+          if(res){
+            this.mostrarMenuEmitter.emit(true);
+            this.userEmitter.emit({usuario,senha});
+          }else{
+            this.mostrarMenuEmitter.emit(false);
+            this.userEmitter.emit({});
+          }
+          // console.log('resosta ', res),
+          // const authToken = res.headers.get('x-access-token') ?? '';
+          // this.salvaToken(authToken);
+        })
       );
   }
 
