@@ -3,6 +3,12 @@ import { User } from './../model/User';
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../service/auth.service';
 import { Router } from '@angular/router';
+import * as jwt from 'jsonwebtoken';
+
+const authConfig={
+  secret: '5e20efab7420d13cd3ccb5e2bf4a1bce',
+  expiresIn: '12h'
+}
 @Component({
   selector: 'app-entrar',
   templateUrl: './entrar.component.html',
@@ -32,6 +38,15 @@ export class EntrarComponent implements OnInit {
     }
     this.auth.entrar(this.userLogin.usuario as string, this.userLogin.senha as string).subscribe((resp: any)=>{
       console.log('auth ', resp)
+      const dataUser ={
+        id: resp[0].id,
+        nome: 'Thiago',
+        sobrenome: 'Suyama',
+        usuario: 'Thiago',
+      }
+      const token = jwt.sign(dataUser, authConfig.secret,{
+        expiresIn: authConfig.expiresIn,
+      });
       this.router.navigate(['/home'])
       this.alert.success('Bem Vindo','Sucesso')
     }, erro =>{

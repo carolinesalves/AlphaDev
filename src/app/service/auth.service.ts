@@ -54,13 +54,9 @@ export class AuthService {
     params = params.append('usuario', usuario);
     params = params.append('senha', senha);
     return this.http.get(
-      `${API}/usuarios`,{params}
-      // ).pipe(
-      //   tap((res)=>{
-      //     console.log('resosta ', res),
-      //     // const authToken = res.headers.get('x-access-token') ?? '';
-      //     // this.salvaToken(authToken);
-      //   })
+      `${API}/usuarios/auth`,{params}
+      ).pipe(
+        tap(x => console.log('get ',x))
       );
   }
 
