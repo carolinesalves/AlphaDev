@@ -57,6 +57,11 @@ export class AuthService {
       `${API}/usuarios/auth`,{params}
       ).pipe(
         tap(x => console.log('get ',x))
+        // tap((res)=>{
+        //   console.log('resosta ', res),
+        //   // const authToken = res.headers.get('x-access-token') ?? '';
+        //   // this.salvaToken(authToken);
+        // })
       );
   }
 
