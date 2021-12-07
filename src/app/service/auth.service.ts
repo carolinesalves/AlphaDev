@@ -47,6 +47,8 @@ export class AuthService {
   logout(){
     this.tokenService.excluiToken();
     this.usuarioSubject.next({});
+    this.mostrarMenuEmitter.emit(false);
+    this.userEmitter.emit({});
   }
 
   estaLogado(){

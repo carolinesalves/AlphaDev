@@ -3,7 +3,6 @@ import { User } from './../model/User';
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../service/auth.service';
 import { Router } from '@angular/router';
-import {Md5} from 'ts-md5/dist/md5';
 
 const authConfig={
   secret: '5e20efab7420d13cd3ccb5e2bf4a1bce',
@@ -40,9 +39,9 @@ export class EntrarComponent implements OnInit {
     this.auth.entrar(this.userLogin.usuario as string, this.userLogin.senha as string).subscribe((resp: any)=>{
       console.log('auth ', resp)
       if(resp){
-        const md5 = new Md5();
-        const hash = md5.appendStr(this.userLogin.usuario as string).end()
-        console.log( 'hash', hash );
+        // const md5 = new Md5();
+        // const hash = md5.appendStr(this.userLogin.usuario as string).end()
+        // console.log( 'hash', hash );
         this.auth.salvaToken('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ODIsIm5vbWUiOiJBZG1pbiIsInNvYnJlbm9tZSI6IkFkbWluIiwidXN1YXJpbyI6IkFkbWluIiwiaWF0IjoxNjM2NTkxOTYyLCJleHAiOjE2MzY2MzUxNjJ9.WjPoE3QHETKaTW8m1edGrJ7qrRPoapQ8rPIO5wS-b-0')
         this.router.navigate(['/home'])
         this.alert.success('Bem Vindo','Sucesso')
