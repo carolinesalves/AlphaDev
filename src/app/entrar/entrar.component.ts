@@ -31,6 +31,7 @@ export class EntrarComponent implements OnInit {
       return;
     }
     this.auth.entrar(this.userLogin.usuario as string, this.userLogin.senha as string).subscribe((resp: any)=>{
+      console.log('auth ', resp)
       this.router.navigate(['/home'])
       this.alert.success('Bem Vindo','Sucesso')
     }, erro =>{

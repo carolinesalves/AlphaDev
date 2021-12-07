@@ -1,7 +1,7 @@
 import { environment } from './../../environments/environment';
 import { IUser } from './../model/User';
 import { TokenService } from './../autenticacao/token.service';
-import { HttpClient, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, } from 'rxjs';
 import { tap } from 'rxjs/operators';
@@ -49,18 +49,17 @@ export class AuthService {
   estaLogado(){
     return this.tokenService.possuiToken();
   }
-  entrar(usuario: string, senha:string): Observable<HttpResponse<any>> {
-    return this.http.post(
-      `${API}/usuario/auth`,
-      {
-        usuario,
-        senha,
-      },
-      { observe: 'response' }
+  entrar(usuario: string, senha:string): Observable<any> {
+    let params = new HttpParams();
+    params = params.append('usuario', usuario);
+    params = params.append('senha', senha);
+    return this.http.get(
+      `${API}/usuarios`,{params}
       ).pipe(
         tap((res)=>{
-          const authToken = res.headers.get('x-access-token') ?? '';
-          this.salvaToken(authToken);
+          console.log('resosta ', res),
+          // const authToken = res.headers.get('x-access-token') ?? '';
+          // this.salvaToken(authToken);
         })
       );
   }
