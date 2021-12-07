@@ -4,10 +4,6 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../service/auth.service';
 import { Router } from '@angular/router';
 
-const authConfig={
-  secret: '5e20efab7420d13cd3ccb5e2bf4a1bce',
-  expiresIn: '12h'
-}
 @Component({
   selector: 'app-entrar',
   templateUrl: './entrar.component.html',
@@ -26,7 +22,7 @@ export class EntrarComponent implements OnInit {
 
   ngOnInit() {
     window.scroll(0,0)
-    
+
   }
 
   entrar(){
@@ -37,12 +33,8 @@ export class EntrarComponent implements OnInit {
       return;
     }
     this.auth.entrar(this.userLogin.usuario as string, this.userLogin.senha as string).subscribe((resp: any)=>{
-      console.log('auth ', resp)
       if(resp){
-        // const md5 = new Md5();
-        // const hash = md5.appendStr(this.userLogin.usuario as string).end()
-        // console.log( 'hash', hash );
-        this.auth.salvaToken('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ODIsIm5vbWUiOiJBZG1pbiIsInNvYnJlbm9tZSI6IkFkbWluIiwidXN1YXJpbyI6IkFkbWluIiwiaWF0IjoxNjM2NTkxOTYyLCJleHAiOjE2MzY2MzUxNjJ9.WjPoE3QHETKaTW8m1edGrJ7qrRPoapQ8rPIO5wS-b-0')
+        this.auth.salvaToken('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ODIsIm5vbWUiOiJ1c3VhcmlvIiwic29icmVub21lIjoidXN1YXJpbyIsInVzdWFyaW8iOiJBZG1pbiIsImlhdCI6MTYzNjU5MTk2MiwiZXhwIjoxNjM2NjM1MTYyfQ.Z7KtjwaoJJ-3fI9X9kdZ_gsgbv-Hc_iD8fppdirIdVI')
         this.router.navigate(['/home'])
         this.alert.success('Bem Vindo','Sucesso')
       }
