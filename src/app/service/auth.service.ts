@@ -77,6 +77,23 @@ export class AuthService {
       );
   }
 
+
+  gerarToken(usuario: string): Observable<HttpResponse<any>> {
+    return this.http.post(
+      `http://localhost:3000/auth`,
+      {
+        usuario,
+      },
+      { observe: 'response' }
+      ).pipe(
+        tap((res)=>{
+          const authToken = res.headers.get('x-access-token') ?? '';
+          console.log('authToken', authToken)
+          this.salvaToken(authToken);
+        })
+      );
+  }
+
   cadastrar(user: User): Observable<User>{
     return this.http.post<User>(`${API}/usuarios`, user)
   }

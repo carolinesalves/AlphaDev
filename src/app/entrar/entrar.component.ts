@@ -22,7 +22,6 @@ export class EntrarComponent implements OnInit {
 
   ngOnInit() {
     window.scroll(0,0)
-
   }
 
   entrar(){
@@ -34,9 +33,12 @@ export class EntrarComponent implements OnInit {
     }
     this.auth.entrar(this.userLogin.usuario as string, this.userLogin.senha as string).subscribe((resp: any)=>{
       if(resp){
-        this.auth.salvaToken('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ODIsIm5vbWUiOiJ1c3VhcmlvIiwic29icmVub21lIjoidXN1YXJpbyIsInVzdWFyaW8iOiJBZG1pbiIsImlhdCI6MTYzNjU5MTk2MiwiZXhwIjoxNjM2NjM1MTYyfQ.Z7KtjwaoJJ-3fI9X9kdZ_gsgbv-Hc_iD8fppdirIdVI')
-        this.router.navigate(['/home'])
-        this.alert.success('Bem Vindo','Sucesso')
+        // this.auth.salvaToken('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ODIsIm5vbWUiOiJ1c3VhcmlvIiwic29icmVub21lIjoidXN1YXJpbyIsInVzdWFyaW8iOiJBZG1pbiIsImlhdCI6MTYzNjU5MTk2MiwiZXhwIjoxNjM2NjM1MTYyfQ.Z7KtjwaoJJ-3fI9X9kdZ_gsgbv-Hc_iD8fppdirIdVI')
+        this.auth.gerarToken(this.userLogin.usuario as string).subscribe((data)=>{
+          console.log('data' ,data )
+          this.router.navigate(['/home'])
+          this.alert.success('Bem Vindo','Sucesso')
+        })
       }
     }, erro =>{
       console.warn('erro',erro)
