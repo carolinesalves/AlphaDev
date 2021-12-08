@@ -7,6 +7,15 @@ const cors = require('cors');
 
 const app = express();
 
+const corsOptions = {
+    exposedHeaders: ['x-access-token']
+};
+
+app.use(cors(corsOptions))
+app.use(express.json());
+app.post('/auth',SessionController.store)
+
+
 // Serve only the static files form the dist directory
 app.use(express.static('./dist/loginCadastro'));
 
@@ -27,4 +36,4 @@ app.listen(process.env.PORT || 8080, () => console.log('Servidor na 8080'));
 // server.listen(3000, ()=> console.log('Servidor rodando na porta 3000'))
 // server.use(cors(corsOptions))
 // server.use(express.json());
-// server.post('/auth',SessionController.store)
+// app.post('/auth',SessionController.store)
