@@ -214,15 +214,15 @@ export class RecebidosComponent implements OnInit {
   receberPedido() {
     console.log('this.item', this.item)
     console.log('this.dadosDosItens', this.dadosDosItens)
-    console.log('this.dadosDoPedido[0].DataDeValidade',this.dadosDoPedido[0].DataDeValidade)
-    const dataValidade = moment(this.dadosDoPedido[0].DataDeValidade).format()
+    console.log('this.dadosDoPedido[0].DataDeValidade',this.dadosDosItens[0].DataDeValidade)
+    const dataValidade = moment(this.dadosDosItens[0].DataDeValidade).format()
     const hoje = (moment(new Date()).format())
 
     if(moment(dataValidade).isAfter(hoje)){
       const body ={
-        nomeProduto: this.dadosDoPedido[0].descricaoProduto,
-        quantidade : this.dadosDoPedido[0].quantidadeRecebida,
-        unidadeMedida: this.dadosDoPedido[0].unidadeMedida
+        nomeProduto: this.dadosDosItens[0].descricaoProduto,
+        quantidade : this.dadosDosItens[0].quantidadeRecebida,
+        unidadeMedida: this.dadosDosItens[0].unidadeMedida
       }
       console.log('recebido', body)
       this.recebidoService.receberPedido(body).subscribe((data)=>{
