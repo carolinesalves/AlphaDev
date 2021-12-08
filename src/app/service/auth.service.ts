@@ -9,6 +9,7 @@ import { User } from '../model/User';
 import jwt_decode from 'jwt-decode';
 
 const API = environment.apiURL;
+const APIToken = environment.apiToken;
 
 @Injectable({
   providedIn: 'root'
@@ -80,7 +81,7 @@ export class AuthService {
 
   gerarToken(usuario: string): Observable<HttpResponse<any>> {
     return this.http.post(
-      `http://localhost:3000/auth`,
+      `${APIToken}/auth`,
       {
         usuario,
       },
