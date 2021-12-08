@@ -19,7 +19,7 @@ export class EstoqueService {
   }
 
   saidaEstoque(id: string, produto:IPedido): Observable<IPedido>{
-    return this.http.post<IPedido>(`${API}/estoque/${id}`, produto)
+    return this.http.patch<IPedido>(`${API}/estoque/${id}`, produto)
   }
 
 }
