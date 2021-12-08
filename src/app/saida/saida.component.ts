@@ -49,6 +49,7 @@ export class SaidaComponent implements OnInit {
     const form = this.formSaida.getRawValue()
     const body :IPedido ={
       id: form.descricaoProduto && form.descricaoProduto.length ? form.descricaoProduto[0].id :'',
+      nomeProduto: form.descricaoProduto && form.descricaoProduto.length ? form.descricaoProduto[0].text :'',
       quantidade: form.quantidade ?? 0,
     }
     return body;

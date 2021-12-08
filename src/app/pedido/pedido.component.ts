@@ -143,7 +143,6 @@ export class PedidoComponent implements OnInit {
 
   tratarCampos() : IPedido{
     const form = this.formPedido.getRawValue();
-    console.log('tratarCampos' , form)
     const body :IPedido ={
       produto: form.descricaoProduto && form.descricaoProduto.length ? form.descricaoProduto[0].id :'',
       fornecedor: form.fornecedor && form.fornecedor.length ? form.fornecedor[0].id : '',
@@ -179,7 +178,8 @@ export class PedidoComponent implements OnInit {
 
 
   salvar(){
-    const body = this.lista
+    this.adicionar();
+    const body = this.lista[0];
     this.pedidoService.gerarPedido(body).subscribe((data)=>{
       this.formPedido.reset();
       this.alert.success('Pedido Gerado','Sucesso!')

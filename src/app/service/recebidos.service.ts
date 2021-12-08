@@ -13,8 +13,8 @@ export class RecebidosService {
 
   constructor(private http: HttpClient) { }
 
-  receberPedido(numeroPedido:string ,body?:IPedido[]): Observable<IPedido>{
-    return this.http.post<IPedido>(`${API}/recebidos/${numeroPedido}`, body)
+  receberPedido(body?:IPedido): Observable<IPedido>{
+    return this.http.post<IPedido>(`${API}/estoque/`, body)
   };
 
 }

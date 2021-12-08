@@ -5,6 +5,7 @@ export interface IPedido {
   produto?: number | IProduto | [IProduto] | any,
   fornecedor?: number | IFornecedor | [IFornecedor] | any,
   quantidade?: number | string,
+  nomeProduto?: number | string,
   unidadeMedida?: string,
   isEditable?: boolean;
   isDeletable?: boolean;

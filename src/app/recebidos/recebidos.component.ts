@@ -5,6 +5,7 @@ import { DataTableConfig, DataTableItem } from './../componentes/tabela/tabela.c
 import { ToastrService } from 'ngx-toastr';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import * as moment from 'moment/moment';
 
 @Component({
   selector: 'app-recebidos',
@@ -213,16 +214,29 @@ export class RecebidosComponent implements OnInit {
   receberPedido() {
     console.log('this.item', this.item)
     console.log('this.dadosDosItens', this.dadosDosItens)
+    const dataValidade = moment(this.dadosDoPedido[0].DataDeValidade);
+    const hoje = moment();
 
-    this.recebidoService.receberPedido(`${this.numeroPedido}`,this.item).subscribe((data)=>{
-      console.log('data',data)
-      this.alert.success('Pedido Recebido','Sucesso!')
-      this.item =[];
-      this.numeroPedido ='';
-    }, error =>{
-      console.warn('error', error)
-      this.alert.error('Tente novamente','Falha')
-    })
+    if(dataValidade.isAfter(hoje)){
+      const body ={
+        nomeProduto: this.dadosDoPedido[0].descricaoProduto,
+        quantidade : this.dadosDoPedido[0].quantidadeRecebida,
+        unidadeMedida: this.dadosDoPedido[0].unidadeMedida
+      }
+      this.recebidoService.receberPedido(body).subscribe((data)=>{
+        console.log('data',data)
+        this.alert.success('Pedido Recebido','Sucesso!')
+        this.item =[];
+        this.numeroPedido ='';
+      }, error =>{
+        console.warn('error', error)
+        this.alert.error('Tente novamente','Falha')
+      })
+      return;
+    }
+    this.alert.info('Produto com data de validade inválida','Sucesso!')
+
+
   }
 
   confirmarItem(event:Event){

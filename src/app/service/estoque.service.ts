@@ -18,8 +18,8 @@ export class EstoqueService {
     return this.http.get<[IProduto]>(`${API}/estoque`,)
   }
 
-  saidaEstoque(item: string, produto:IPedido): Observable<IPedido>{
-    return this.http.post<IPedido>(`${API}/estoque/${item}`, produto)
+  saidaEstoque(id: string, produto:IPedido): Observable<IPedido>{
+    return this.http.post<IPedido>(`${API}/estoque/${id}`, produto)
   }
 
 }

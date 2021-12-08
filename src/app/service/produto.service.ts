@@ -23,5 +23,8 @@ export class ProdutoService {
   buscarTodosProdutos(): Observable<Array<IProduto>>{
     return this.http.get<[IProduto]>(`${API}/produtos`,)
   }
+  buscarProduto(item: string): Observable<IProduto>{
+    return this.http.get<IProduto>(`${API}/produtos/${item}`,)
+  }
   
 }

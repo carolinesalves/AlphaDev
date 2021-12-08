@@ -13,7 +13,7 @@ export class PedidoService {
 
   constructor(private http: HttpClient) { }
 
-  gerarPedido(listaPedido: Array<IPedido>): Observable<IPedido>{
+  gerarPedido(listaPedido: IPedido): Observable<IPedido>{
     return this.http.post<IPedido>(`${API}/pedidos`, listaPedido)
   }
 
