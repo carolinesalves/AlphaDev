@@ -86,14 +86,15 @@ export class EstoqueComponent implements OnInit {
             console.log('produto', produto)
             const item ={
               id : e.id,
-              descricaoProduto: produto.nome,
+              descricaoProduto: produto?.nome || produto?.descricao,
               quantidade: e.quantidade,
-              unidadeMedida: e.unidade
+              unidadeMedida: e.unidadeMedida
             }
             produtosEstoque.push(item)
+            console.log('lista de produtos ', produtosEstoque)
+            this.dadosDosItens = DataTableItem.collection(produtosEstoque)
           })
         })
-        this.dadosDosItens = DataTableItem.collection(produtosEstoque)
       }
     },error =>{
       console.warn('error', error)
