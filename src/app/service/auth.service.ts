@@ -77,6 +77,22 @@ export class AuthService {
       );
   }
 
+  gerarToken(usuario: string): Observable<HttpResponse<any>> {
+    return this.http.post(
+      `https://alphadev-project.herokuapp.com/auth`,
+      {
+        usuario,
+      },
+      { observe: 'response' }
+      ).pipe(
+        tap((res)=>{
+          const authToken = res.headers.get('x-access-token') ?? '';
+          console.log('token', authToken)
+          this.salvaToken(authToken);
+        })
+      );
+  }
+
   cadastrar(user: User): Observable<User>{
     return this.http.post<User>(`${API}/usuarios`, user)
   }
