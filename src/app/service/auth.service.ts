@@ -81,7 +81,7 @@ export class AuthService {
 
   gerarToken(usuario: string): Observable<HttpResponse<any>> {
     return this.http.post(
-      `${APIToken}/auth`,
+      `https://localhost:3000/auth`,
       {
         usuario,
       },
