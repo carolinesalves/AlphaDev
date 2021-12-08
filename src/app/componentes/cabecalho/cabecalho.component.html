@@ -11,7 +11,7 @@
     </a>
     <app-menu #menu>
       <div *ngIf="user$ | async as user">
-      <div *ngIf="user.nome; else login">
+      <div *ngIf="user.usuario; else login">
         <ul class="nav flex-column">
           <li class="nav-item active" (click)="menu.abreMenu()">
             <a class="nav-link" routerLink='/home'>Home</a>
