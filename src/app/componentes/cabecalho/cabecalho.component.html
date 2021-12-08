@@ -45,11 +45,11 @@
       </div>
     </app-menu>
 
-    <!-- <div *ngIf="user$ | async as user"> -->
-    <div>
+    <div *ngIf="user$ | async as user">
+    <!-- <div> -->
       <div *ngIf="mostrarMenu; else login">
         <i class="fa fa-user-circle mr-1" style="margin-right: 2px;"> </i>
-        <a class="mr-1" style="margin-right: 10px;">{{ usuarioLogado?.usuario }}</a>
+        <a class="mr-1" style="margin-right: 10px;">{{ user?.usuario }}</a>
         <a (click)="logout()" style="margin-right: 30px;cursor: pointer;">Logout</a>
       </div>
     </div>
