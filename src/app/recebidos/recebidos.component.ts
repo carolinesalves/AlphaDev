@@ -214,10 +214,8 @@ export class RecebidosComponent implements OnInit {
   receberPedido() {
     console.log('this.item', this.item)
     console.log('this.dadosDosItens', this.dadosDosItens)
-    const dataValidade = moment(this.dadosDoPedido[0].DataDeValidade);
-    const hoje = moment();
-
-    if(dataValidade.isAfter(hoje)){
+    console.log('teste', moment(this.dadosDoPedido[0].DataDeValidade).isAfter(moment(new Date(), 'YYYY/MM/DD')))
+    if(moment(this.dadosDoPedido[0].DataDeValidade).isAfter(moment(new Date(), 'YYYY/MM/DD'))){
       const body ={
         nomeProduto: this.dadosDoPedido[0].descricaoProduto,
         quantidade : this.dadosDoPedido[0].quantidadeRecebida,

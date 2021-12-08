@@ -31,11 +31,6 @@ export class EstoqueComponent implements OnInit {
         type: 'text'
       },
       {
-        var: 'fornecedor',
-        label: 'Fornecedor',
-        type: 'text'
-      },
-      {
         var: 'quantidade',
         label: 'Quantidade',
         type: 'text'
@@ -83,22 +78,20 @@ export class EstoqueComponent implements OnInit {
     this.estoqueService.buscarEstoque().subscribe((data)=>{
       console.log('estoque', data)
       if(Array.isArray(data) && data.length){
-        const idProduto = data[0].id;
-        this.produtoService.buscarProduto(String(idProduto)).subscribe(produto=>{
-          console.log('produto', produto)
-        })
-
+        // const idProduto = data[0].id;
         const produtosEstoque:any[] =[]
         data.forEach((e)=>{
           console.log('es',e)
-          const item ={
-            id : e.id,
-            descricaoProduto: e.produto?.nome,
-            fornecedor: e.fornecedor?.nomeFornecedor,
-            quantidade: e.quantidade,
-            unidadeMedida: e.unidade
-          }
-          produtosEstoque.push(item)
+          this.produtoService.buscarProduto(String(e.id)).subscribe(produto=>{
+            console.log('produto', produto)
+            const item ={
+              id : e.id,
+              descricaoProduto: produto.nome,
+              quantidade: e.quantidade,
+              unidadeMedida: e.unidade
+            }
+            produtosEstoque.push(item)
+          })
         })
         this.dadosDosItens = DataTableItem.collection(produtosEstoque)
       }

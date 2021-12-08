@@ -144,8 +144,8 @@ export class PedidoComponent implements OnInit {
   tratarCampos() : IPedido{
     const form = this.formPedido.getRawValue();
     const body :IPedido ={
-      produto: form.descricaoProduto && form.descricaoProduto.length ? form.descricaoProduto[0].id :'',
-      fornecedor: form.fornecedor && form.fornecedor.length ? form.fornecedor[0].id : '',
+      produto: {id :form.descricaoProduto && form.descricaoProduto.length ? form.descricaoProduto[0].id :''},
+      fornecedor: {id:form.fornecedor && form.fornecedor.length ? form.fornecedor[0].id : ''},
       quantidade: form.quantidade ?? 0,
       unidadeMedida: form.unidadeMedida && form.unidadeMedida.length ? form.unidadeMedida[0].text : '',
       isViewItem: false,
