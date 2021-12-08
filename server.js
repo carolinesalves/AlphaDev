@@ -18,13 +18,13 @@ app.get('/*', (req, res) =>
 app.listen(process.env.PORT || 8080, () => console.log('Servidor na 8080'));
 
 
-const server = express();
+// const server = express();
 
-const corsOptions = {
-    exposedHeaders: ['x-access-token']
-};
+// const corsOptions = {
+//     exposedHeaders: ['x-access-token']
+// };
 
-server.listen(3000, ()=> console.log('Servidor rodando na porta 3000'))
-server.use(cors(corsOptions))
-server.use(express.json());
-server.post('/auth',SessionController.store)
+// server.listen(3000, ()=> console.log('Servidor rodando na porta 3000'))
+// server.use(cors(corsOptions))
+// server.use(express.json());
+// server.post('/auth',SessionController.store)

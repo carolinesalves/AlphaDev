@@ -9,7 +9,6 @@ import { User } from '../model/User';
 import jwt_decode from 'jwt-decode';
 
 const API = environment.apiURL;
-const APIToken = environment.apiToken;
 
 @Injectable({
   providedIn: 'root'
@@ -74,23 +73,6 @@ export class AuthService {
           // console.log('resosta ', res),
           // const authToken = res.headers.get('x-access-token') ?? '';
           // this.salvaToken(authToken);
-        })
-      );
-  }
-
-
-  gerarToken(usuario: string): Observable<HttpResponse<any>> {
-    return this.http.post(
-      `https://localhost:3000/auth`,
-      {
-        usuario,
-      },
-      { observe: 'response' }
-      ).pipe(
-        tap((res)=>{
-          const authToken = res.headers.get('x-access-token') ?? '';
-          console.log('authToken', authToken)
-          this.salvaToken(authToken);
         })
       );
   }
