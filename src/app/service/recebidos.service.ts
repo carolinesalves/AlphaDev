@@ -14,7 +14,7 @@ export class RecebidosService {
   constructor(private http: HttpClient) { }
 
   receberPedido(numeroPedido:string ,body?:IPedido): Observable<IPedido>{
-    return this.http.post<IPedido>(`${API}/estoque/adicionar/${numeroPedido}`, body)
+    return this.http.patch<IPedido>(`${API}/estoque/adicionar/${numeroPedido}`, body)
   };
 
 }
