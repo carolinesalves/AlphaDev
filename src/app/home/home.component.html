@@ -8,6 +8,27 @@
             <hr>
             <h2 class="text-center">Sugestão de compra</h2>
 
+            <table class="table table-striped">
+              <thead>
+              <tr>
+                <th scope="col" class="bold">#</th>
+                <th scope="col" class="bold">Produto</th>
+                <th scope="col" class="bold">Quantidade</th>
+                <th scope="col" class="bold">Unidade de medida</th>
+              </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let produto of produtos">
+                  <th scope="row">{{ produto.id }}</th>
+                  <td>
+                    <ngb-highlight [result]="produto.nome | uppercase"></ngb-highlight>
+                  </td>
+                  <td><ngb-highlight [result]="produto.quantidade"></ngb-highlight></td>
+                  <td><ngb-highlight [result]="produto.unidadeMedida"></ngb-highlight></td>
+              </tr>
+              </tbody>
+            </table>
+
           </div>
         </div>
       </div>

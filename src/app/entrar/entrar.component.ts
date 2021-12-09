@@ -29,6 +29,9 @@ export class EntrarComponent implements OnInit {
   entrar(){
     if(this.userLogin.usuario === 'admin' && this.userLogin.senha ==='admin'){
       this.auth.salvaToken('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ODIsIm5vbWUiOiJBZG1pbiIsInNvYnJlbm9tZSI6IkFkbWluIiwidXN1YXJpbyI6IkFkbWluIiwiaWF0IjoxNjM2NTkxOTYyLCJleHAiOjE2MzY2MzUxNjJ9.WjPoE3QHETKaTW8m1edGrJ7qrRPoapQ8rPIO5wS-b-0')
+      this.auth.mostrarMenuEmitter.emit(true);
+      this.auth.userEmitter.emit({usuario:this.userLogin.usuario,senha:this.userLogin.senha});
+      
       this.router.navigate(['/home'])
       this.alert.success('Bem Vindo','Sucesso')
       return;
