@@ -68,14 +68,26 @@ export class HomeComponent implements OnInit {
     const respostaRegistro =  registros.reduce((soma, cur) =>{
       let nome = cur.nome;
       let repetido = soma.find((elem: any) => elem.nome === nome)
-      if(repetido){
-        repetido['total']+= cur.quantidade; 
+      if(!repetido){
+        soma[cur]['total']=1;
+        // repetido['total']+= cur.quantidade; 
       }else{
-        soma.push(cur)
+        // soma.push(cur)
+        soma[cur]['total']++;
       }
       return soma;
     },[])
     
+    // const respostaRegistro =  registros.reduce(function( object , item ){  
+    //   console.log( object , item ); 
+    //   if ( !object[item].nome ) {
+    //      object[item].nome=1;
+    //   } else {
+    //      object[item].nome++;
+    //   }
+    //   return object; 
+    // },{}) 
+
     console.log('respostaRegistro',respostaRegistro)
   }
 
