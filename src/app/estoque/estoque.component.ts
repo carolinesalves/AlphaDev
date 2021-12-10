@@ -36,6 +36,11 @@ export class EstoqueComponent implements OnInit {
         type: 'text'
       },
       {
+        var: 'qtdminima',
+        label: 'Quantidade mínima',
+        type: 'text'
+      },
+      {
         var: 'unidadeMedida',
         label: 'Unidade de Medida',
         type: 'text'
@@ -47,31 +52,6 @@ export class EstoqueComponent implements OnInit {
 
   ngOnInit(): void {
     this.buscarEstoque();
-    // const itemTeste = [
-    //   {
-    //     id : 1,
-    //     descricaoProduto: 'Arroz',
-    //     fornecedor:'Camil',
-    //     quantidade: 20,
-    //     unidadeMedida: 'KG'
-    //   },
-    //   {
-    //     id : 2,
-    //     descricaoProduto: 'Feijão',
-    //     fornecedor:'Kicaldo',
-    //     quantidade: 20,
-    //     unidadeMedida: 'KG'
-    //   },
-    //   {
-    //     id : 3,
-    //     descricaoProduto: 'Nori Alga Marinha',
-    //     fornecedor:'Sidchen',
-    //     quantidade: 20,
-    //     unidadeMedida: 'UN'
-    //   },
-    // ]
-    // this.dadosDosItens = DataTableItem.collection(itemTeste)
-    
   }
 
   buscarEstoque(){
@@ -81,14 +61,14 @@ export class EstoqueComponent implements OnInit {
         // const idProduto = data[0].id;
         const produtosEstoque:any[] =[]
         data.forEach((e)=>{
-          console.log('es',e)
           this.produtoService.buscarProduto(String(e.id)).subscribe(produto=>{
             console.log('produto', produto)
             const item ={
               id : e.id,
               descricaoProduto: produto?.nome || produto?.descricao,
               quantidade: e.quantidade,
-              unidadeMedida: e.unidadeMedida
+              unidadeMedida: e.unidadeMedida,
+              qtdminima: produto.quantidade || '0'
             }
             produtosEstoque.push(item)
             console.log('lista de produtos ', produtosEstoque)

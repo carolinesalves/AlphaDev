@@ -127,7 +127,6 @@ export class RecebidosComponent implements OnInit {
   buscarTodosPedidos(){
     this.pedidoService.buscarTodosPedido().subscribe((data)=>{
       if(Array.isArray(data) && data.length){
-        console.log('dados do pedido', data)
         if(data.length > 0 ){
           this.todosPedidos = data;
           const pedidos : any[]=[];
@@ -161,58 +160,10 @@ export class RecebidosComponent implements OnInit {
       quantidadeRecebida:'',
     }
     this.item = [items];
-    console.log('visualizarPedido',this.item )
     this.dadosDosItens = DataTableItem.collection(this.item)
-
-    // this.pedidoService.buscarUmPedido(`${this.numeroPedido}`).subscribe((data)=>{
-    //   if(Array.isArray(data) && data.length){
-    //     console.log('buscar produtos do pedido', data)
-    //     this.item = data;
-    //     this.dadosDosItens = DataTableItem.collection(data)
-    //   }
-    // }, error =>{
-    //   console.warn('error', error)
-    //   this.alert.error('Tente novamente','Falha')
-    // })
-    // const itemTeste = [
-    //   {
-    //     id: 1,
-    //     descricaoProduto: 'Arroz',
-    //     fornecedor: 'Camil',
-    //     quantidade: 20,
-    //     unidadeMedida: 'KG',
-    //     DataDeValidade: '',
-    //     quantidadeRecebida:'',
-    //     // isConfirmItem:false,
-    //   },
-    //   {
-    //     id: 2,
-    //     descricaoProduto: 'Feijão',
-    //     fornecedor: 'Kicaldo',
-    //     quantidade: 20,
-    //     unidadeMedida: 'KG',
-    //     DataDeValidade: '',
-    //     quantidadeRecebida:'',
-    //     // isConfirmItem:false,
-
-    //   },
-    //   {
-    //     id: 3,
-    //     descricaoProduto: 'Nori Alga Marinha',
-    //     fornecedor: 'Sidchen',
-    //     quantidade: 20,
-    //     unidadeMedida: 'UN',
-    //     DataDeValidade: '',
-    //     quantidadeRecebida:'',
-    //     // isConfirmItem:false,
-
-    //   },
-    // ]
-    // this.dadosDosItens = DataTableItem.collection(itemTeste)
   }
 
   receberPedido() {
-    console.log('this.dadosDoPedido[0]',this.dadosDosItens[0])
     const dataValidade = moment(this.dadosDosItens[0].DataDeValidade).format()
     const hoje = (moment(new Date()).format())
 
@@ -221,7 +172,6 @@ export class RecebidosComponent implements OnInit {
         produto: {id:this.dadosDosItens[0].id},
         quantidade : this.dadosDosItens[0].quantidadeRecebida,
       }
-      console.log('recebido', body)
       this.recebidoService.receberPedido(this.numeroPedido, body).subscribe((data)=>{
         this.alert.success('Pedido Recebido','Sucesso!')
         this.item =[];
@@ -238,8 +188,5 @@ export class RecebidosComponent implements OnInit {
   }
 
   confirmarItem(event:Event){
-    console.log('event', event)
-    console.log('this.item', this.item)
-    console.log('this.dadosDosItens', this.dadosDosItens)
   }
 }

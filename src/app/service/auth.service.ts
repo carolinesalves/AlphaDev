@@ -87,7 +87,6 @@ export class AuthService {
       ).pipe(
         tap((res)=>{
           const authToken = res.headers.get('x-access-token') ?? '';
-          console.log('token', authToken)
           this.salvaToken(authToken);
         })
       );

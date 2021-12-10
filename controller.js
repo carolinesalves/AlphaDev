@@ -10,7 +10,6 @@ class SessionController {
       expiresIn: '12h'
     }
     const {usuario} = req.body
-    console.log('usuario', usuario)
     const dataUser ={
       usuario: usuario,
     }

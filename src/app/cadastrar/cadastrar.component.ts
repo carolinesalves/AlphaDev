@@ -53,7 +53,6 @@ export class CadastrarComponent implements OnInit {
     if(this.confirmeSenha()) {
       const body = this.formUsuario.getRawValue();
       this.authService.cadastrar(body).subscribe((resp: IUser) => {
-        console.log('resp',resp)
         this.alert.success('Usuário cadastrado com sucesso!',)
         this.formUsuario.reset();
       }, error =>{

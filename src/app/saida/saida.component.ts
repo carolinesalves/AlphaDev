@@ -38,11 +38,6 @@ export class SaidaComponent implements OnInit {
   ngOnInit(): void {
     this.configuracaoDoCampoSelect()
     this.buscarTodosProdutos();
-    // this.listaProduto=[
-    //   {id:1, text:'arroz'},
-    //   {id:2, text:'teste1'},
-    //   {id:3, text:'teset2'},
-    // ]
   }
 
   tratarCampos():IPedido{
@@ -57,11 +52,10 @@ export class SaidaComponent implements OnInit {
 
   retirar(): void{
     const body = this.tratarCampos();
-    console.log('body', body)
     this.estoqueService.saidaEstoque(`${body.id}`, body).subscribe((data)=>{
-      console.log('data',data)
       this.alert.success('Produto Retirado','Sucesso!')
       this.formSaida.reset();
+      this.formSaida.get('descricaoProduto')?.setValue({})
     }, error =>{
       console.warn('error', error)
       this.alert.error('Tente novamente','Falha')
