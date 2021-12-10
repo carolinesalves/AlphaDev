@@ -69,11 +69,11 @@ export class HomeComponent implements OnInit {
       let nome = cur.nome;
       let repetido = soma.find((elem: any) => elem.nome === nome)
       if(!repetido){
-        soma[cur]['total']=1;
+        soma[cur]=1;
         // repetido['total']+= cur.quantidade; 
       }else{
         // soma.push(cur)
-        soma[cur]['total']++;
+        soma[cur]++;
       }
       return soma;
     },[])
@@ -87,6 +87,10 @@ export class HomeComponent implements OnInit {
     //   }
     //   return object; 
     // },{}) 
+
+    respostaRegistro.forEach(element => {
+        console.log('iten', element)
+    });
 
     console.log('respostaRegistro',respostaRegistro)
   }
