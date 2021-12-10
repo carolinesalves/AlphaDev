@@ -88,7 +88,7 @@ export class HomeComponent implements OnInit {
     //   return object; 
     // },{}) 
 
-    respostaRegistro.forEach(element => {
+    respostaRegistro.forEach((element:any) => {
         console.log('iten', element)
     });
 
