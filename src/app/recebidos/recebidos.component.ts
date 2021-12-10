@@ -121,7 +121,6 @@ export class RecebidosComponent implements OnInit {
   }
 
   visualizarPedido(pedido: any) {
-    console.log('pedido', pedido)
     this.numeroPedido = pedido.id
     const pedidoSelecionado = this.todosPedidos.filter((e)=> e.id === pedido.id)
     const items = {
@@ -151,6 +150,9 @@ export class RecebidosComponent implements OnInit {
         this.alert.success('Pedido Recebido','Sucesso!')
         this.item =[];
         this.numeroPedido ='';
+        this.dadosDosItens=[];
+        this.dadosDoPedido=[];
+        this.buscarTodosPedidos();
       }, error =>{
         console.warn('error', error)
         this.alert.error('Tente novamente','Falha')

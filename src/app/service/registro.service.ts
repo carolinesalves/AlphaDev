@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment.prod';
+import { IRegistro } from '../model/registro';
 
 const API = environment.apiURL;
 
@@ -12,7 +13,7 @@ export class RegistroService {
 
   constructor(private http: HttpClient) { }
 
-  receberRegistro(): Observable<any>{
-    return this.http.get<any>(`${API}/registro`,)
+  receberRegistro(): Observable<[IRegistro]>{
+    return this.http.get<[IRegistro]>(`${API}/registro`,)
   };
 }

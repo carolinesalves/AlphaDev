@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { RegistroService } from '../service/registro.service';
+import { IRegistro } from '../model/registro';
+import { EstoqueService } from '../service/estoque.service';
+import { ProdutoService } from '../service/produto.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-home',
@@ -9,11 +13,22 @@ import { RegistroService } from '../service/registro.service';
 export class HomeComponent implements OnInit {
 
   produtos: {id:string, nome:string, quantidade:string, unidadeMedida:string}[]=[]
-  constructor(private registroService: RegistroService) { }
+  produtosEstoque:any[] =[]
+  registroDeProdutos:IRegistro[] =[]
+
+
+  constructor(private registroService: RegistroService,
+    private estoqueService : EstoqueService,
+    private produtoService : ProdutoService,
+    private alert : ToastrService,
+
+
+    ) { }
 
   ngOnInit(): void {
-    this.registroService.receberRegistro().subscribe((data)=>{
-      console.log('data', data)
+    this.buscarEstoque();
+    this.registroService.receberRegistro().subscribe((registros)=>{
+      this.sugerirCompra(registros);
     })
 
     this.produtos=[
@@ -45,5 +60,39 @@ export class HomeComponent implements OnInit {
     ]
   }
 
+  sugerirCompra(registros:[IRegistro]):void{
+    this.registroDeProdutos= registros;
+    console.log('registros', this.registroDeProdutos)
+
+    registros.forEach((registro:IRegistro) => {
+      
+    });
+
+  }
+
+  buscarEstoque(){
+    this.estoqueService.buscarEstoque().subscribe((data)=>{
+      console.log('estoque', data)
+      if(Array.isArray(data) && data.length){
+        data.forEach((e)=>{
+          this.produtoService.buscarProduto(String(e.id)).subscribe(produto=>{
+            console.log('produto', produto)
+            const item ={
+              id : e.id,
+              descricaoProduto: produto?.nome || produto?.descricao,
+              quantidade: e.quantidade,
+              unidadeMedida: e.unidadeMedida,
+              qtdminima: produto.quantidade || '0'
+            }
+            this.produtosEstoque.push(item)
+            console.log('lista de produtos ', this.produtosEstoque)
+          })
+        })
+      }
+    },error =>{
+      console.warn('error', error)
+      this.alert.error('Tente novamente','Falha')
+    })
+  }
 
 }
