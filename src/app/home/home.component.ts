@@ -65,15 +65,16 @@ export class HomeComponent implements OnInit {
     console.log('registros', this.registroDeProdutos)
     console.log('lista de produtos ', this.produtosEstoque)
 
-    const respostaRegistro =  registros.reduce(function( object , item ){  
-      console.log( object , item ); 
-      if ( !object[item].nome ) {
-         object[item].nome=1;
-      } else {
-         object[item].nome++;
+    const respostaRegistro =  registros.reduce((soma, cur) =>{
+      let nome = cur.nome;
+      let repetido = soma.find((elem: any) => elem.nome === nome)
+      if(repetido){
+        repetido['total']+= cur.quantidade; 
+      }else{
+        soma.push(cur)
       }
-      return object; 
-    },{})  
+      return soma;
+    },[])
     
     console.log('respostaRegistro',respostaRegistro)
   }
