@@ -92,35 +92,7 @@ export class RecebidosComponent implements OnInit {
 
 
   ngOnInit(): void {
-
     this.buscarTodosPedidos();
-
-    // const listaTeste = [
-    //   {
-    //     id: 1,
-    //     fornecedor: 'Atacadão',
-    //     isViewItem: true,
-    //   },
-    //   {
-    //     id: 2,
-    //     fornecedor: 'Mercado',
-    //     isViewItem: true,
-
-    //   },
-    //   {
-    //     id: 3,
-    //     fornecedor: 'Loja 1',
-    //     isViewItem: true,
-
-    //   },
-    //   {
-    //     id: 4,
-    //     fornecedor: 'Mergado 2',
-    //     isViewItem: true,
-
-    //   },
-    // ]
-    // this.dadosDoPedido = DataTableItem.collection(listaTeste)
   }
 
 

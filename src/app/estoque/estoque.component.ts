@@ -58,7 +58,6 @@ export class EstoqueComponent implements OnInit {
     this.estoqueService.buscarEstoque().subscribe((data)=>{
       console.log('estoque', data)
       if(Array.isArray(data) && data.length){
-        // const idProduto = data[0].id;
         const produtosEstoque:any[] =[]
         data.forEach((e)=>{
           this.produtoService.buscarProduto(String(e.id)).subscribe(produto=>{
