@@ -60,23 +60,20 @@ export class HomeComponent implements OnInit {
     ]
   }
 
-  sugerirCompra(registros:[any]):void{
+  sugerirCompra(registros:[IRegistro]):void{
     this.registroDeProdutos= registros;
     console.log('registros', this.registroDeProdutos)
     console.log('lista de produtos ', this.produtosEstoque)
 
-    const respostaRegistro =  registros.reduce((soma, cur) =>{
-      let nome = cur.nome;
-      let repetido = soma.find((elem: any) => elem.nome === nome)
-      if(!repetido){
-        soma[cur]=1;
-        // repetido['total']+= cur.quantidade; 
+    const respostaRegistro =  registros.reduce((registro:any, index)=>{
+      let nome = index.nome;
+      let repetido:IRegistro = registro.find((elem:IRegistro)=> elem.nome === nome);
+      if(repetido){
+        repetido.quantidade +=index.quantidade;
       }else{
-        // soma.push(cur)
-        soma[cur]++;
+        registros.push(index)
       }
-      return soma;
-    },[])
+    }, []);
     
     // const respostaRegistro =  registros.reduce(function( object , item ){  
     //   console.log( object , item ); 
@@ -88,9 +85,9 @@ export class HomeComponent implements OnInit {
     //   return object; 
     // },{}) 
 
-    respostaRegistro.forEach((element:any) => {
-        console.log('iten', element)
-    });
+    // respostaRegistro.forEach((element:any) => {
+    //     console.log('iten', element)
+    // });
 
     console.log('respostaRegistro',respostaRegistro)
   }
