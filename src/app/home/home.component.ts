@@ -67,10 +67,10 @@ export class HomeComponent implements OnInit {
 
     const respostaRegistro =  registros.reduce(function( object , item ){  
       console.log( object , item ); 
-      if ( !object[item] ) {
-         object[item]=1;
+      if ( !object[item].nome ) {
+         object[item].nome=1;
       } else {
-         object[item]++;
+         object[item].nome++;
       }
       return object; 
     },{})  
