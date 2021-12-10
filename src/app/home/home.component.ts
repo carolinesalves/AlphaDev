@@ -60,14 +60,22 @@ export class HomeComponent implements OnInit {
     ]
   }
 
-  sugerirCompra(registros:[IRegistro]):void{
+  sugerirCompra(registros:[any]):void{
     this.registroDeProdutos= registros;
     console.log('registros', this.registroDeProdutos)
+    console.log('lista de produtos ', this.produtosEstoque)
 
-    registros.forEach((registro:IRegistro) => {
-      
-    });
-
+    const respostaRegistro =  registros.reduce(function( object , item ){  
+      console.log( object , item ); 
+      if ( !object[item] ) {
+         object[item]=1;
+      } else {
+         object[item]++;
+      }
+      return object; 
+    },{})  
+    
+    console.log('respostaRegistro',respostaRegistro)
   }
 
   buscarEstoque(){
@@ -76,7 +84,6 @@ export class HomeComponent implements OnInit {
       if(Array.isArray(data) && data.length){
         data.forEach((e)=>{
           this.produtoService.buscarProduto(String(e.id)).subscribe(produto=>{
-            console.log('produto', produto)
             const item ={
               id : e.id,
               descricaoProduto: produto?.nome || produto?.descricao,
@@ -85,7 +92,6 @@ export class HomeComponent implements OnInit {
               qtdminima: produto.quantidade || '0'
             }
             this.produtosEstoque.push(item)
-            console.log('lista de produtos ', this.produtosEstoque)
           })
         })
       }
