@@ -98,6 +98,7 @@ export class RecebidosComponent implements OnInit {
 
   buscarTodosPedidos(){
     this.pedidoService.buscarTodosPedido().subscribe((data)=>{
+      console.log('todos pedidos', data)
       if(Array.isArray(data) && data.length){
         if(data.length > 0 ){
           this.todosPedidos = data;
@@ -120,6 +121,7 @@ export class RecebidosComponent implements OnInit {
   }
 
   visualizarPedido(pedido: any) {
+    console.log('pedido', pedido)
     this.numeroPedido = pedido.id
     const pedidoSelecionado = this.todosPedidos.filter((e)=> e.id === pedido.id)
     const items = {
