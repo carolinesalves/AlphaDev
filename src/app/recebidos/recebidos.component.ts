@@ -142,8 +142,9 @@ export class RecebidosComponent implements OnInit {
     if(moment(dataValidade).isAfter(hoje)){
       const body ={
         produto: {id:this.dadosDosItens[0].id},
-        quantidade : this.dadosDosItens[0].quantidadeRecebida,
+        quantidade : parseInt(this.dadosDosItens[0].quantidadeRecebida),
       }
+      console.log('body', body)
       this.recebidoService.receberPedido(this.numeroPedido, body).subscribe((data)=>{
         this.alert.success('Pedido Recebido','Sucesso!')
         this.item =[];
