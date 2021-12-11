@@ -19,12 +19,12 @@
               </thead>
               <tbody>
                 <tr *ngFor="let produto of produtos">
-                  <th scope="row">{{ produto.id }}</th>
+                  <th scope="row">{{ produto?.id }}</th>
                   <td>
-                    <ngb-highlight [result]="produto.nome | uppercase"></ngb-highlight>
+                    <ngb-highlight [result]="produto?.nome | uppercase"></ngb-highlight>
                   </td>
-                  <td><ngb-highlight [result]="produto.quantidade"></ngb-highlight></td>
-                  <td><ngb-highlight [result]="produto.unidadeMedida"></ngb-highlight></td>
+                  <td><ngb-highlight [result]="produto?.quantidade"></ngb-highlight></td>
+                  <td><ngb-highlight [result]="produto?.unidadeMedida"></ngb-highlight></td>
               </tr>
               </tbody>
             </table>

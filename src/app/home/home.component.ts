@@ -31,7 +31,9 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.buscarEstoque();
     this.registroService.receberRegistro().subscribe((registros)=>{
-      this.sugerirCompra(registros);
+      setTimeout(() => {
+        this.sugerirCompra(registros);
+      }, 500);
     })
   }
 
@@ -145,16 +147,25 @@ export class HomeComponent implements OnInit {
     console.log('contagemRegistro', contagemRegistro)
     const produtosSugerir:IRegistro[]=[];
     contagemRegistro.forEach(produtoAtual  => {
+      console.log('produtoAtual.nome', produtoAtual.nome)
       const existeProduto = this.produtosEstoque.find(e => e.descricaoProduto === produtoAtual.nome)
       console.log('existeProduto' ,existeProduto)
       if(existeProduto){
         const quantidadeEmEstoque = existeProduto.quantidade ? existeProduto.quantidade : 0;
-        // if(produtoAtual.quantidadeParaComprar < 1){
-        //   produtoAtual.sugerir=false;
-        //   produtoAtual.unidadeMedida=existeProduto?.unidadeMedida || '';
-        //   produtosSugerir.push(produtoAtual);
-        //   return;
-        // }
+        if(produtoAtual.quantidadeParaComprar < 1){
+          if(quantidadeEmEstoque < produtoAtual.quantidadeMinimaEstoque){
+            produtoAtual.sugerir=true;
+            produtoAtual.comprar = produtoAtual.mediaDiaria
+            produtoAtual.unidadeMedida= existeProduto.unidadeMedida;
+            produtosSugerir.push(produtoAtual);
+            return;
+          }else{
+            produtoAtual.sugerir=false;
+            produtoAtual.unidadeMedida=existeProduto?.unidadeMedida || '';
+            produtosSugerir.push(produtoAtual);
+            return;
+          }
+        }
         if(quantidadeEmEstoque < produtoAtual.quantidadeMinimaEstoque){
           produtoAtual.sugerir=true;
           produtoAtual.comprar = produtoAtual.mediaDiaria
@@ -173,11 +184,11 @@ export class HomeComponent implements OnInit {
     });
     console.log('produtosSugerir',produtosSugerir)
 
-    produtosSugerir.forEach(item =>{
+    produtosSugerir.forEach((item, index) =>{
       if(item.sugerir){
-        let cont=0;
+        // let cont=0;
         const produto :IExibirSugestao={
-          id: String(cont+1),
+          id: String(index+1),
           nome: item.nome,
           quantidade: String(item.comprar),
           unidadeMedida: item.unidadeMedida ? item.unidadeMedida : '',
