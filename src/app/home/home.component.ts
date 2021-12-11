@@ -7,6 +7,7 @@ import { ToastrService } from 'ngx-toastr';
 import * as moment from 'moment/moment';
 moment.locale('pt-br');
 
+interface IExibirSugestao {id:string, nome:string, quantidade:string, unidadeMedida:string}
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -14,10 +15,10 @@ moment.locale('pt-br');
 })
 export class HomeComponent implements OnInit {
 
-  produtos: IRegistro[]=[]
+  // produtos: IRegistro[]=[]
   produtosEstoque:any[] =[]
   registroDeProdutos:IRegistro[] =[]
-
+  produtos: {id:string, nome:string, quantidade:string, unidadeMedida:string}[]=[]
   // todosRegistros:IRegistro[]= [
   //   {
   //       id: 1,
@@ -497,7 +498,6 @@ export class HomeComponent implements OnInit {
     const produtosSugerir:IRegistro[]=[];
     contagemRegistro.forEach(produtoAtual  => {
       const existeProduto = this.produtosEstoque.find(e => e.descricaoProduto === produtoAtual.nome)
-      console.log('exiteProduto', existeProduto)
       const quantidadeEmEstoque = existeProduto?.quantidade || 0;
       if(produtoAtual.quantidadeParaComprar < 1){
         produtoAtual.sugerir=false;
@@ -512,9 +512,23 @@ export class HomeComponent implements OnInit {
         return
       }
     });
+    console.log('produtosSugerir',produtosSugerir)
 
-    console.log('produtosSugerir', produtosSugerir)
-    this.produtos= produtosSugerir;
+    produtosSugerir.forEach(item =>{
+      if(item.sugerir){
+        let cont=0;
+        //id:string, nome:string, quantidade:string, unidadeMedida:string
+        const produto :IExibirSugestao={
+          id: String(cont+1),
+          nome: item.nome,
+          quantidade: item.quantidadeParaComprar,
+          unidadeMedida: item.unidadeMedida ? item.unidadeMedida : '',
+        }
+        this.produtos.push(produto)
+      }
+    })
+    console.log('this.produtos',this.produtos)
+    
   }
 
   buscarEstoque(){
