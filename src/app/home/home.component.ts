@@ -119,8 +119,8 @@ export class HomeComponent implements OnInit {
       }
       if( contador < 6 && contador > 3 ){
         const mediaDiaria = Math.trunc(e.quantidadeAcumuladas/contador);
-        const periodoMaximo = 8;
-        const retencao =7
+        const periodoMaximo = 12;
+        const retencao = 3
         const quantidadeMaximaEstoque = mediaDiaria * periodoMaximo;
         const quantidadeMinimaEstoque = mediaDiaria * retencao;
         const quantidadeParaComprar = quantidadeMaximaEstoque - quantidadeMinimaEstoque;
@@ -133,10 +133,10 @@ export class HomeComponent implements OnInit {
         contagemRegistro.push(e);
         return;
       }
-      if( contador < 3){
+      if( contador <= 3){
         const mediaDiaria = Math.trunc(e.quantidadeAcumuladas/contador);
         const periodoMaximo = 6;
-        const retencao =7
+        const retencao =1
         const quantidadeMaximaEstoque = mediaDiaria * periodoMaximo;
         const quantidadeMinimaEstoque = mediaDiaria * retencao;
         const quantidadeParaComprar = quantidadeMaximaEstoque - quantidadeMinimaEstoque;
@@ -159,6 +159,8 @@ export class HomeComponent implements OnInit {
       // console.log('existeProduto' ,existeProduto)
       if(existeProduto){
         const quantidadeEmEstoque = existeProduto.quantidade ? existeProduto.quantidade : 0;
+        console.log("produtoAtual.quantidadeParaComprar", produtoAtual.quantidadeParaComprar)
+        console.log("produtoAtual", produtoAtual)
         if(produtoAtual.quantidadeParaComprar < 1){
           if(quantidadeEmEstoque < produtoAtual.quantidadeMinimaEstoque){
             produtoAtual.sugerir=true;
