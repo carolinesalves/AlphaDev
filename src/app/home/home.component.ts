@@ -8,6 +8,13 @@ import * as moment from 'moment/moment';
 moment.locale('pt-br');
 
 interface IExibirSugestao {id:string, nome:string, quantidade:string, unidadeMedida:string}
+interface IEstoque {
+  id ?: number,
+  descricaoProduto ?: string
+  quantidade?: string | number,
+  unidadeMedida?: string
+  qtdminima?: string | number,
+}
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -15,7 +22,7 @@ interface IExibirSugestao {id:string, nome:string, quantidade:string, unidadeMed
 })
 export class HomeComponent implements OnInit {
 
-  produtosEstoque:any[] =[]
+  produtosEstoque:IEstoque[] =[]
   registroDeProdutos:IRegistro[] =[]
   produtos: {id:string, nome:string, quantidade:string, unidadeMedida:string}[]=[]
   
@@ -38,8 +45,7 @@ export class HomeComponent implements OnInit {
   }
 
   sugerirCompra(registros:IRegistro[]):void{
-    console.log('estoque', this.produtosEstoque)
-    console.log('registros', registros)
+    // console.log('registros', registros)
     const listaRegistro:IRegistro[]=[];
     const hoje = moment(new Date()).format()
     // const dataInicio = moment(new Date()).subtract(15,'days').format();
@@ -144,12 +150,13 @@ export class HomeComponent implements OnInit {
         return;
       }
     })
-    console.log('contagemRegistro', contagemRegistro)
+    // console.log('contagemRegistro', contagemRegistro)
     const produtosSugerir:IRegistro[]=[];
+    // console.log('estoque', this.produtosEstoque)
     contagemRegistro.forEach(produtoAtual  => {
-      console.log('produtoAtual.nome', produtoAtual.nome)
+      // console.log('produtoAtual.nome', produtoAtual.nome)
       const existeProduto = this.produtosEstoque.find(e => e.descricaoProduto === produtoAtual.nome)
-      console.log('existeProduto' ,existeProduto)
+      // console.log('existeProduto' ,existeProduto)
       if(existeProduto){
         const quantidadeEmEstoque = existeProduto.quantidade ? existeProduto.quantidade : 0;
         if(produtoAtual.quantidadeParaComprar < 1){
@@ -182,13 +189,13 @@ export class HomeComponent implements OnInit {
         }
       }
     });
-    console.log('produtosSugerir',produtosSugerir)
+    // console.log('produtosSugerir',produtosSugerir)
 
     produtosSugerir.forEach((item, index) =>{
       if(item.sugerir){
-        // let cont=0;
+        let cont=0;
         const produto :IExibirSugestao={
-          id: String(index+1),
+          id: String(cont++),
           nome: item.nome,
           quantidade: String(item.comprar),
           unidadeMedida: item.unidadeMedida ? item.unidadeMedida : '',
@@ -206,7 +213,7 @@ export class HomeComponent implements OnInit {
       if(Array.isArray(data) && data.length){
         data.forEach((e)=>{
           this.produtoService.buscarProduto(String(e.id)).subscribe(produto=>{
-            const item ={
+            const item: IEstoque ={
               id : e.id,
               descricaoProduto: produto?.nome || produto?.descricao,
               quantidade: e.quantidade,
