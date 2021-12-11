@@ -104,7 +104,7 @@ export class HomeComponent implements OnInit {
       if( contador > 6 ){
         const mediaDiaria = Math.trunc(e.quantidadeAcumuladas/contador);
         const periodoMaximo = 14;
-        const retencao =7
+        const retencao = 7
         const quantidadeMaximaEstoque = mediaDiaria * periodoMaximo;
         const quantidadeMinimaEstoque = mediaDiaria * retencao;
         const quantidadeParaComprar = quantidadeMaximaEstoque - quantidadeMinimaEstoque;
@@ -159,8 +159,10 @@ export class HomeComponent implements OnInit {
       // console.log('existeProduto' ,existeProduto)
       if(existeProduto){
         const quantidadeEmEstoque = existeProduto.quantidade ? existeProduto.quantidade : 0;
-        console.log("produtoAtual.quantidadeParaComprar", produtoAtual.quantidadeParaComprar)
+        // console.log("produtoAtual.quantidadeParaComprar", produtoAtual.quantidadeParaComprar)
         console.log("produtoAtual", produtoAtual)
+        console.log('existeProdutoEstoque' ,existeProduto)
+
         if(produtoAtual.quantidadeParaComprar < 1){
           if(quantidadeEmEstoque < produtoAtual.quantidadeMinimaEstoque){
             produtoAtual.sugerir=true;
@@ -177,14 +179,14 @@ export class HomeComponent implements OnInit {
         }
         if(quantidadeEmEstoque < produtoAtual.quantidadeMinimaEstoque){
           produtoAtual.sugerir=true;
-          produtoAtual.comprar = produtoAtual.mediaDiaria
+          produtoAtual.comprar = produtoAtual.quantidadeParaComprar
           produtoAtual.unidadeMedida= existeProduto.unidadeMedida;
           produtosSugerir.push(produtoAtual);
           return;
         }
         if(quantidadeEmEstoque > produtoAtual.quantidadeMaximaEstoque){
           produtoAtual.sugerir=false;
-          produtoAtual.comprar = produtoAtual.mediaDiaria
+          produtoAtual.comprar = produtoAtual.quantidadeParaComprar
           produtoAtual.unidadeMedida= existeProduto.unidadeMedida;
           produtosSugerir.push(produtoAtual);
           return;
