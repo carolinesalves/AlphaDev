@@ -98,7 +98,7 @@ export class RecebidosComponent implements OnInit {
 
   buscarTodosPedidos(){
     this.pedidoService.buscarTodosPedido().subscribe((data)=>{
-      console.log('todos pedidos', data)
+      // console.log('todos pedidos', data)
       if(Array.isArray(data) && data.length){
         if(data.length > 0 ){
           this.todosPedidos = data;
@@ -139,14 +139,14 @@ export class RecebidosComponent implements OnInit {
   receberPedido() {
     const dataValidade = moment(this.dadosDosItens[0].DataDeValidade).format()
     const hoje = (moment(new Date()).format())
-    console.log('this.dadosDosItens', this.dadosDosItens)
+    // console.log('this.dadosDosItens', this.dadosDosItens)
     if(moment(dataValidade).isAfter(hoje)){
       const body ={
         produto: {id:this.dadosDosItens[0].id},
         quantidade : parseInt(this.dadosDosItens[0].quantidadeRecebida),
         unidadeMedida: this.dadosDosItens[0].unidadeMedida
       }
-      console.log('body', body)
+      // console.log('body', body)
       this.recebidoService.receberPedido(this.numeroPedido, body).subscribe((data)=>{
         this.alert.success('Pedido Recebido','Sucesso!')
         this.item =[];

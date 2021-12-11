@@ -56,12 +56,12 @@ export class EstoqueComponent implements OnInit {
 
   buscarEstoque(){
     this.estoqueService.buscarEstoque().subscribe((data)=>{
-      console.log('estoque', data)
+      // console.log('estoque', data)
       if(Array.isArray(data) && data.length){
         const produtosEstoque:any[] =[]
         data.forEach((e)=>{
           this.produtoService.buscarProduto(String(e.id)).subscribe(produto=>{
-            console.log('produto', produto)
+            // console.log('produto', produto)
             const item ={
               id : e.id,
               descricaoProduto: produto?.nome || produto?.descricao,
@@ -70,7 +70,7 @@ export class EstoqueComponent implements OnInit {
               qtdminima: produto.quantidade || '0'
             }
             produtosEstoque.push(item)
-            console.log('lista de produtos ', produtosEstoque)
+            // console.log('lista de produtos ', produtosEstoque)
             this.dadosDosItens = DataTableItem.collection(produtosEstoque)
           })
         })
