@@ -14,5 +14,6 @@ export interface IRegistro{
   quantidadeMaximaEstoque?: any,
   quantidadeMinimaEstoque?: any,
   quantidadeParaComprar?: any,
+  comprar?: any,
   sugerir?: boolean,
 }

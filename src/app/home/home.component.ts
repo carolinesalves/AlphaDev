@@ -154,15 +154,15 @@ export class HomeComponent implements OnInit {
       //   produtosSugerir.push(produtoAtual);
       //   return;
       // }
-      if(quantidadeEmEstoque < produtoAtual.quantidadeMaximaEstoque || quantidadeEmEstoque < produtoAtual.quantidadeMinimaEstoque){
+      if(quantidadeEmEstoque < produtoAtual.quantidadeMinimaEstoque){
         produtoAtual.sugerir=true;
-        // produtoAtual.quantidade = produtoAtual.quantidadeMaximaEstoque - quantidadeEmEstoque
-        produtoAtual.unidadeMedida=existeProduto?.unidadeMedida;
+        produtoAtual.comprar = produtoAtual.mediaDiaria
+        produtoAtual.unidadeMedida= existeProduto.unidadeMedida;
         produtosSugerir.push(produtoAtual);
         return;
       }
     });
-    // console.log('produtosSugerir',produtosSugerir)
+    console.log('produtosSugerir',produtosSugerir)
 
     produtosSugerir.forEach(item =>{
       if(item.sugerir){
@@ -170,7 +170,7 @@ export class HomeComponent implements OnInit {
         const produto :IExibirSugestao={
           id: String(cont+1),
           nome: item.nome,
-          quantidade: item.quantidadeParaComprar,
+          quantidade: String(item.comprar),
           unidadeMedida: item.unidadeMedida ? item.unidadeMedida : '',
         }
         this.produtos.push(produto)
