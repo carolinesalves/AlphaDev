@@ -163,34 +163,51 @@ export class HomeComponent implements OnInit {
         console.log("produtoAtual", produtoAtual)
         console.log('existeProdutoEstoque' ,existeProduto)
 
-        if(produtoAtual.quantidadeParaComprar < 1){
-          if(quantidadeEmEstoque < produtoAtual.quantidadeMinimaEstoque){
-            produtoAtual.sugerir=true;
-            produtoAtual.comprar = produtoAtual.mediaDiaria
-            produtoAtual.unidadeMedida= existeProduto.unidadeMedida;
-            produtosSugerir.push(produtoAtual);
-            return;
-          }else{
-            produtoAtual.sugerir=false;
-            produtoAtual.unidadeMedida=existeProduto?.unidadeMedida || '';
-            produtosSugerir.push(produtoAtual);
-            return;
-          }
-        }
-        if(quantidadeEmEstoque < produtoAtual.quantidadeMinimaEstoque){
-          produtoAtual.sugerir=true;
-          produtoAtual.comprar = produtoAtual.quantidadeParaComprar
-          produtoAtual.unidadeMedida= existeProduto.unidadeMedida;
-          produtosSugerir.push(produtoAtual);
-          return;
-        }
-        if(quantidadeEmEstoque > produtoAtual.quantidadeMaximaEstoque){
+        // if(produtoAtual.quantidadeParaComprar < 1){
+        //   if(quantidadeEmEstoque < produtoAtual.quantidadeMinimaEstoque){
+        //     produtoAtual.sugerir=true;
+        //     produtoAtual.comprar = produtoAtual.mediaDiaria
+        //     produtoAtual.unidadeMedida= existeProduto.unidadeMedida;
+        //     produtosSugerir.push(produtoAtual);
+        //     return;
+        //   }else{
+        //     produtoAtual.sugerir=false;
+        //     produtoAtual.unidadeMedida=existeProduto?.unidadeMedida || '';
+        //     produtosSugerir.push(produtoAtual);
+        //     return;
+        //   }
+        // }
+        if(quantidadeEmEstoque >= produtoAtual.quantidadeMaximaEstoque){
           produtoAtual.sugerir=false;
           produtoAtual.comprar = produtoAtual.quantidadeParaComprar
           produtoAtual.unidadeMedida= existeProduto.unidadeMedida;
           produtosSugerir.push(produtoAtual);
           return;
         }
+        if(quantidadeEmEstoque < produtoAtual.quantidadeMaximaEstoque){
+          const diariaEmEstoque = Math.trunc(parseInt(String(quantidadeEmEstoque))/produtoAtual.mediaDiaria)
+          console.log('diariaEmEstoque', diariaEmEstoque)
+          if( diariaEmEstoque < produtoAtual.periodoMaximo){
+            produtoAtual.sugerir=true;
+            produtoAtual.comprar = produtoAtual.quantidadeParaComprar
+            produtoAtual.unidadeMedida= existeProduto.unidadeMedida;
+            produtosSugerir.push(produtoAtual);
+            return;
+          }else{
+            produtoAtual.sugerir=false;
+            produtoAtual.comprar = produtoAtual.quantidadeParaComprar
+            produtoAtual.unidadeMedida= existeProduto.unidadeMedida;
+            produtosSugerir.push(produtoAtual);
+            return;
+          }
+        }else{
+          produtoAtual.sugerir=false;
+          produtoAtual.comprar = produtoAtual.quantidadeParaComprar
+          produtoAtual.unidadeMedida= existeProduto.unidadeMedida;
+          produtosSugerir.push(produtoAtual);
+          return;
+        }
+        
       }
     });
     // console.log('produtosSugerir',produtosSugerir)
