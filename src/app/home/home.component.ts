@@ -147,7 +147,7 @@ export class HomeComponent implements OnInit {
     contagemRegistro.forEach(produtoAtual  => {
       const existeProduto = this.produtosEstoque.find(e => e.descricaoProduto === produtoAtual.nome)
       console.log('existeProduto' ,existeProduto)
-      const quantidadeEmEstoque = existeProduto.quantidade;
+      const quantidadeEmEstoque = existeProduto.quantidade ? existeProduto.quantidade : 0;
       // if(produtoAtual.quantidadeParaComprar < 1){
       //   produtoAtual.sugerir=false;
       //   produtoAtual.unidadeMedida=existeProduto?.unidadeMedida || '';
@@ -156,6 +156,13 @@ export class HomeComponent implements OnInit {
       // }
       if(quantidadeEmEstoque < produtoAtual.quantidadeMinimaEstoque){
         produtoAtual.sugerir=true;
+        produtoAtual.comprar = produtoAtual.mediaDiaria
+        produtoAtual.unidadeMedida= existeProduto.unidadeMedida;
+        produtosSugerir.push(produtoAtual);
+        return;
+      }
+      if(quantidadeEmEstoque > produtoAtual.quantidadeMaximaEstoque){
+        produtoAtual.sugerir=false;
         produtoAtual.comprar = produtoAtual.mediaDiaria
         produtoAtual.unidadeMedida= existeProduto.unidadeMedida;
         produtosSugerir.push(produtoAtual);
