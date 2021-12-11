@@ -142,11 +142,12 @@ export class HomeComponent implements OnInit {
         return;
       }
     })
-    // console.log('contagemRegistro', contagemRegistro)
+    console.log('contagemRegistro', contagemRegistro)
     const produtosSugerir:IRegistro[]=[];
     contagemRegistro.forEach(produtoAtual  => {
       const existeProduto = this.produtosEstoque.find(e => e.descricaoProduto === produtoAtual.nome)
-      const quantidadeEmEstoque = existeProduto?.quantidade || 0;
+      console.log('existeProduto' ,existeProduto)
+      const quantidadeEmEstoque = existeProduto.quantidade;
       // if(produtoAtual.quantidadeParaComprar < 1){
       //   produtoAtual.sugerir=false;
       //   produtoAtual.unidadeMedida=existeProduto?.unidadeMedida || '';
@@ -155,8 +156,8 @@ export class HomeComponent implements OnInit {
       // }
       if(quantidadeEmEstoque < produtoAtual.quantidadeMaximaEstoque || quantidadeEmEstoque < produtoAtual.quantidadeMinimaEstoque){
         produtoAtual.sugerir=true;
-        produtoAtual.quantidade = produtoAtual.quantidadeMaximaEstoque - quantidadeEmEstoque
-        produtoAtual.unidadeMedida=existeProduto?.unidadeMedida || '';
+        // produtoAtual.quantidade = produtoAtual.quantidadeMaximaEstoque - quantidadeEmEstoque
+        produtoAtual.unidadeMedida=existeProduto?.unidadeMedida;
         produtosSugerir.push(produtoAtual);
         return;
       }
