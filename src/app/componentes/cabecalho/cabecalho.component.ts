@@ -25,7 +25,7 @@ export class CabecalhoComponent  implements OnInit  {
     }
 
     ngOnInit(): void{
-      this.auth.logout();
+      // this.auth.logout();
       this.auth.mostrarMenuEmitter.subscribe((mostrar) => {
         this.mostrarMenu = mostrar
         this.auth.userEmitter.subscribe(usuario => this.usuarioLogado = usuario)

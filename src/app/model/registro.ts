@@ -1,6 +1,9 @@
 export interface IRegistro{
-  dataRetirada: string,
-  id: number,
+  id?: number,
   nome: string,
   quantidade: number,
+  dataRetirada: string,
+  contador?: number,
+  datasAcumuladas?: any,
+  quantidadeAcumuladas?: any,
 }
