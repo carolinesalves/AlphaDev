@@ -192,10 +192,10 @@ export class HomeComponent implements OnInit {
     // console.log('produtosSugerir',produtosSugerir)
 
     produtosSugerir.forEach((item, index) =>{
+      let cont=0;
       if(item.sugerir){
-        let cont=0;
         const produto :IExibirSugestao={
-          id: String(cont++),
+          id: String(cont=cont+1),
           nome: item.nome,
           quantidade: String(item.comprar),
           unidadeMedida: item.unidadeMedida ? item.unidadeMedida : '',
