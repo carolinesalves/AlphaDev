@@ -147,6 +147,12 @@ export class RecebidosComponent implements OnInit {
         unidadeMedida: this.dadosDosItens[0].unidadeMedida
       }
       // console.log('body', body)
+      const quantidadeZero = body.quantidade === 0 ? true : false;
+      const quantidadeNegativa = body.quantidade && body.quantidade < 1 ? true: false;
+      if(quantidadeZero || quantidadeNegativa){
+        this.alert.warning('Quantidade zero ou negativo','Falha')
+        return;
+      }
       this.recebidoService.receberPedido(this.numeroPedido, body).subscribe((data)=>{
         this.alert.success('Pedido Recebido','Sucesso!')
         this.item =[];

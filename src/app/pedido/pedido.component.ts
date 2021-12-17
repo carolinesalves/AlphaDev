@@ -180,6 +180,12 @@ export class PedidoComponent implements OnInit {
   salvar(){
     this.adicionar();
     const body = this.lista[0];
+    const quantidadeZero = body.quantidade === 0 ? true : false;
+    const quantidadeNegativa = body.quantidade && body.quantidade < 1 ? true: false;
+    if(quantidadeZero || quantidadeNegativa){
+      this.alert.warning('Quantidade zero ou negativo','Falha')
+      return;
+    }
     this.pedidoService.gerarPedido(body).subscribe((data)=>{
       this.formPedido.reset();
       this.alert.success('Pedido Gerado','Sucesso!')

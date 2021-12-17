@@ -52,6 +52,12 @@ export class SaidaComponent implements OnInit {
 
   retirar(): void{
     const body = this.tratarCampos();
+    const quantidadeZero = body.quantidade === 0 ? true : false;
+    const quantidadeNegativa = body.quantidade && body.quantidade < 1 ? true: false;
+    if(quantidadeZero || quantidadeNegativa){
+      this.alert.warning('Quantidade zero ou negativo','Falha')
+      return;
+    }
     this.estoqueService.saidaEstoque(`${body.id}`, body).subscribe((data)=>{
       this.alert.success('Produto Retirado','Sucesso!')
       this.formSaida.reset();

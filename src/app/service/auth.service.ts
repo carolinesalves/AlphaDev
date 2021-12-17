@@ -95,5 +95,8 @@ export class AuthService {
   cadastrar(user: User): Observable<User>{
     return this.http.post<User>(`${API}/usuarios`, user)
   }
- 
+  buscarTodosUsuarios(): Observable<User>{
+    return this.http.get<User>(`${API}/usuarios`,)
+  }
+
 }

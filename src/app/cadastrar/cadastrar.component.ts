@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from './../service/auth.service';
 import { Router } from '@angular/router';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import { DataTableItem, DataTableConfig } from '../componentes/tabela/tabela.component';
 
 
 @Component({
@@ -20,9 +21,22 @@ export class CadastrarComponent implements OnInit {
     nome: [null, Validators.required],
     sobrenome:[null],
     usuario:[null, Validators.required],
-    senha:[null, Validators.required],
-    confirmeSenha:[null, Validators.required],
+    senha:[null, [
+      Validators.required,
+      Validators.minLength(8),
+      Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}')
+     ]],
+    confirmeSenha:[null, [
+      Validators.required,
+      Validators.minLength(8),
+      Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}')
+     ]],
   }
+
+  cabecalhoTabela: DataTableConfig;
+  dadosTabela: DataTableItem[];
+
+  
 
   constructor(
     private authService: AuthService,
@@ -36,6 +50,35 @@ export class CadastrarComponent implements OnInit {
 
   ngOnInit() {
     window.scroll(0,0)
+    this.authService.buscarTodosUsuarios().subscribe((data)=>{
+      console.log('usuarios', data)
+    })
+
+    this.cabecalhoTabela = DataTableConfig.default([
+      {
+        var: 'id',
+        label: 'N*',
+        type: 'text'
+      },
+      {
+        var: 'Nome',
+        label: 'Nome',
+        type: 'text'
+      },
+      {
+        var: 'Sobrenome',
+        label: 'Sobrenome',
+        type: 'text'
+      },
+      {
+        var: 'Usuario',
+        label: 'Usuario',
+        type: 'text'
+      }
+      
+    ], 'id');
+    // this.cabecalhoTabela.isEditable = false;
+    // this.cabecalhoTabela.isDeletable = false;
     
   }
 
