@@ -32,8 +32,27 @@ export class ProdutoComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.carregarTabela();
+  }
+
+  carregarTabela(): void{
     this.produtoService.buscarTodosProdutos().subscribe((data)=>{
       console.log('produtos', data)
+      const items=[];
+      if(Array.isArray(data) && data.length){
+        for (const item of data) {
+          const usuario ={
+            nomeProduto: item.nome,
+            descricao: item.descricao,
+            quantidade: item.quantidade
+          }
+          items.push(usuario)
+        }
+        items.sort((a,b)=>{
+          return new Intl.Collator().compare(a.nomeProduto, b.nomeProduto);
+        });
+        this.dadosTabela = DataTableItem.collection(items);
+      }
     })
     this.cabecalhoTabela = DataTableConfig.default([
       {
@@ -42,17 +61,17 @@ export class ProdutoComponent implements OnInit {
         type: 'text'
       },
       {
-        var: 'Nome do Produto',
+        var: 'nomeProduto',
         label: 'Nome do Produto',
         type: 'text'
       },
       {
-        var: 'Descrição do produto',
+        var: 'descricao',
         label: 'Descrição do produto',
         type: 'text'
       },
       {
-        var: 'Quantidade mínima',
+        var: 'quantidade',
         label: 'Quantidade mínima',
         type: 'text'
       }

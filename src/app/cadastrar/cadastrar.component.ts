@@ -50,8 +50,30 @@ export class CadastrarComponent implements OnInit {
 
   ngOnInit() {
     window.scroll(0,0)
+    this.carregarTabela();
+  }
+
+  carregarTabela(): void{
     this.authService.buscarTodosUsuarios().subscribe((data)=>{
       console.log('usuarios', data)
+      const items=[];
+      if(Array.isArray(data) && data.length){
+        for (const item of data) {
+          const usuario ={
+            Nome: item.nome,
+            Sobrenome: item.sobrenome,
+            Usuario: item.usuario
+          }
+          items.push(usuario)
+        }
+        items.sort((a,b)=>{
+          return new Intl.Collator().compare(a.Nome, b.Nome);
+        });
+        this.dadosTabela = DataTableItem.collection(items);
+      }
+    }, error =>{
+      console.warn('error', error)
+      this.alert.error('Tente novamente','Falha')
     })
 
     this.cabecalhoTabela = DataTableConfig.default([

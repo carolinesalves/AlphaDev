@@ -32,9 +32,32 @@ export class FornecedorComponent implements OnInit {
 
   ngOnInit(): void {
     this.validarCampoCnpj()
+    this.carregarTabela()
+  }
+
+  carregarTabela():void{
     this.fornecedorService.buscarTodosFornecedor().subscribe((data)=>{
       console.log('Fornecedores', data)
+      const items=[];
+      if(Array.isArray(data) && data.length){
+        for (const item of data) {
+          const usuario ={
+            NomeDoFornecedor: item.nomeFornecedor,
+            CNPJ: item.cnpj,
+            inscricaoEstadual: item.inscricaoEstadual,
+          }
+          items.push(usuario)
+        }
+        items.sort((a,b)=>{
+          return new Intl.Collator().compare(a.NomeDoFornecedor, b.NomeDoFornecedor);
+        });
+        this.dadosTabela = DataTableItem.collection(items);
+      }
+    }, error =>{
+      console.warn('error', error)
+      this.alert.error('Tente novamente','Falha')
     })
+    
     this.cabecalhoTabela = DataTableConfig.default([
       {
         var: 'id',
@@ -42,7 +65,7 @@ export class FornecedorComponent implements OnInit {
         type: 'text'
       },
       {
-        var: 'Nome do fornecedor',
+        var: 'NomeDoFornecedor',
         label: 'Nome do fornecedor',
         type: 'text'
       },
@@ -52,7 +75,7 @@ export class FornecedorComponent implements OnInit {
         type: 'text'
       },
       {
-        var: 'Inscrição estadual',
+        var: 'inscricaoEstadual',
         label: 'Inscrição estadual',
         type: 'text'
       }
