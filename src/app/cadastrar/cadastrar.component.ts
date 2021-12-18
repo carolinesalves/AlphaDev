@@ -131,6 +131,7 @@ export class CadastrarComponent implements OnInit {
         this.authService.cadastrar(body).subscribe((resp: IUser) => {
           this.alert.success('Usuário cadastrado com sucesso!',)
           this.formUsuario.reset();
+          this.carregarTabela();
         }, error =>{
           console.warn('error', error)
           this.alert.error('Tente novamente','Falha')
@@ -139,6 +140,7 @@ export class CadastrarComponent implements OnInit {
         this.authService.atualizar(this.id,body).subscribe((resp: IUser) => {
           this.alert.success('Cadastrado atualizado com sucesso!',)
           this.formUsuario.reset();
+          this.carregarTabela();
         }, error =>{
           console.warn('error', error)
           this.alert.error('Tente novamente','Falha')
