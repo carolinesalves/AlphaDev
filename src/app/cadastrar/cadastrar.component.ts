@@ -129,4 +129,12 @@ export class CadastrarComponent implements OnInit {
     }
   }
 
+  editarCadastro(event: Event):void{
+    console.log('editarCadastro',event )
+  }
+
+  apagarCadastro(event: Event):void{
+    console.log('apagarCadastro',event)
+  }
+
 }

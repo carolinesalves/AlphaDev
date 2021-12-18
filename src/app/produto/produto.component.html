@@ -30,7 +30,7 @@
                 <div class="col-md-12 fundoForm">
                     <h2 class="text-center">Lista de Produtos</h2>
                     <div class="col-md-12">
-                      <app-tabela [data]="dadosTabela" [config]="cabecalhoTabela"></app-tabela>
+                      <app-tabela [data]="dadosTabela" [config]="cabecalhoTabela" (editItem)="editarCadastro($event)" (deleteItem)="apagarCadastro($event)"></app-tabela>
                     </div>
                 </div>
             </div>

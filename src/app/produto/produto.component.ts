@@ -79,8 +79,8 @@ export class ProdutoComponent implements OnInit {
       }
       
     ], 'id');
-    this.cabecalhoTabela.isEditable = false;
-    this.cabecalhoTabela.isDeletable = false;
+    this.cabecalhoTabela.isEditable = true;
+    this.cabecalhoTabela.isDeletable = true;
   }
 
   cadastrar(): void{
@@ -100,4 +100,11 @@ export class ProdutoComponent implements OnInit {
     })
   }
 
+  editarCadastro(event: Event):void{
+    console.log('editarCadastro',event )
+  }
+
+  apagarCadastro(event: Event):void{
+    console.log('apagarCadastro',event)
+  }
 }
