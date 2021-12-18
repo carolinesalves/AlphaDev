@@ -15,7 +15,7 @@ import Swal, { SweetAlertResult } from 'sweetalert2';
 })
 export class CadastrarComponent implements OnInit {
 
-  // user: User = new User
+  regex = '^(?=[^A-Z]*[A-Z])(?=[^a-z]*[a-z])(?=\\D*\\d)(?=.*[@$!%*?&])[A-Za-z\\d!$%@#£€*?&]{8,}$'; 
   confirmarSenha: string
   formUsuario : FormGroup;
   formFields : Record<string, unknown> ={
@@ -25,12 +25,11 @@ export class CadastrarComponent implements OnInit {
     senha:[null, [
       Validators.required,
       Validators.minLength(8),
-      Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}')
+      Validators.pattern(this.regex)
      ]],
     confirmeSenha:[null, [
       Validators.required,
       Validators.minLength(8),
-      Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}')
      ]],
   }
 
@@ -107,6 +106,54 @@ export class CadastrarComponent implements OnInit {
     this.cabecalhoTabela.isEditable = true;
     this.cabecalhoTabela.isDeletable = true;
     
+    // const dataTeste = [
+    //   {
+    //       id: 1,
+    //       usuario: "admin",
+    //       nome: "admin",
+    //       sobrenome: "admin"
+    //   },
+    //   {
+    //       id: 4,
+    //       usuario: "furia",
+    //       nome: "Fabio",
+    //       sobrenome: "Furia"
+    //   },
+    //   {
+    //       id: 5,
+    //       usuario: "mozart_alemão",
+    //       nome: "mozart da silva",
+    //       sobrenome: " da silva"
+    //   },
+    //   {
+    //       id: 6,
+    //       usuario: "thiago",
+    //       nome: "Thiago",
+    //       sobrenome: "Suyama"
+    //   },
+    //   {
+    //       id: 8,
+    //       usuario: "tese1",
+    //       nome: "teste1",
+    //       sobrenome: "test1"
+    //   }
+    // ]
+    // const itemsTeste =[]
+    // for (const item of dataTeste) {
+    //   const usuario ={
+    //     id: item.id,
+    //     Nome: item.nome,
+    //     Sobrenome: item.sobrenome,
+    //     Usuario: item.usuario,
+    //     isEditable:true,
+    //     isDeletable:true,
+    //   }
+    //   itemsTeste.push(usuario)
+    // }
+    // itemsTeste.sort((a,b)=>{
+    //   return new Intl.Collator().compare(a.Nome, b.Nome);
+    // });
+    // this.dadosTabela = DataTableItem.collection(itemsTeste);
   }
 
   confirmeSenha() :boolean {
@@ -186,6 +233,8 @@ export class CadastrarComponent implements OnInit {
   excluir():void{
     this.authService.excluir(this.id).subscribe((data)=>{
       console.log('Excluir', data)
+      this.carregarTabela();
+      this.novoCadastro();
     },error =>{
       this.alert.error('Por favor, atualize a página e tente novamente.', 'Erro!');
       console.info('error =>',error);

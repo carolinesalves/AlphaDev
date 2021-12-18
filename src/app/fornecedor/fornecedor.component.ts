@@ -182,6 +182,8 @@ export class FornecedorComponent implements OnInit {
   excluir():void{
     this.fornecedorService.excluir(this.id).subscribe((data)=>{
       console.log('Excluir', data)
+      this.carregarTabela();
+      this.novoCadastro();
     },error =>{
       this.alert.error('Por favor, atualize a página e tente novamente.', 'Erro!');
       console.info('error =>',error);

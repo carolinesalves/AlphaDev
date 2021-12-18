@@ -97,6 +97,7 @@ export class ProdutoComponent implements OnInit {
 
   cadastrar(): void{
     const body:IProduto  = Object.assign({}, this.formProduto.value)
+    console.log('body',body)
     const quantidadeZero = body.quantidade === 0 ? true : false;
     const quantidadeNegativa = body.quantidade && body.quantidade < 1 ? true: false;
     if(quantidadeZero || quantidadeNegativa){
@@ -160,6 +161,8 @@ export class ProdutoComponent implements OnInit {
   excluir():void{
     this.produtoService.excluir(this.id).subscribe((data)=>{
       console.log('Excluir', data)
+      this.carregarTabela();
+      this.novoCadastro();
     },error =>{
       this.alert.error('Por favor, atualize a página e tente novamente.', 'Erro!');
       console.info('error =>',error);
