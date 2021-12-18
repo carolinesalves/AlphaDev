@@ -7,7 +7,7 @@ import { ToastrService } from 'ngx-toastr';
 import * as moment from 'moment/moment';
 moment.locale('pt-br');
 
-interface IExibirSugestao {id:string, nome:string, quantidade:string, unidadeMedida:string}
+interface IExibirSugestao {id:number, nome:string, quantidade:string, unidadeMedida:string}
 interface IEstoque {
   id ?: number,
   descricaoProduto ?: string
@@ -24,7 +24,7 @@ export class HomeComponent implements OnInit {
 
   produtosEstoque:IEstoque[] =[]
   registroDeProdutos:IRegistro[] =[]
-  produtos: {id:string, nome:string, quantidade:string, unidadeMedida:string}[]=[]
+  produtos: {id:number, nome:string, quantidade:string, unidadeMedida:string}[]=[]
   
 
   constructor(private registroService: RegistroService,
@@ -212,11 +212,11 @@ export class HomeComponent implements OnInit {
     });
     // console.log('produtosSugerir',produtosSugerir)
 
+    let cont=0;
     produtosSugerir.forEach((item, index) =>{
-      let cont=0;
       if(item.sugerir){
         const produto :IExibirSugestao={
-          id: String(cont=cont+1),
+          id: cont=+1,
           nome: item.nome,
           quantidade: String(item.comprar),
           unidadeMedida: item.unidadeMedida ? item.unidadeMedida : '',

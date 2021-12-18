@@ -62,7 +62,9 @@ export class CadastrarComponent implements OnInit {
           const usuario ={
             Nome: item.nome,
             Sobrenome: item.sobrenome,
-            Usuario: item.usuario
+            Usuario: item.usuario,
+            isEditable:true,
+            isDeletable:true,
           }
           items.push(usuario)
         }
@@ -99,8 +101,8 @@ export class CadastrarComponent implements OnInit {
       }
       
     ], 'id');
-    // this.cabecalhoTabela.isEditable = false;
-    // this.cabecalhoTabela.isDeletable = false;
+    this.cabecalhoTabela.isEditable = true;
+    this.cabecalhoTabela.isDeletable = true;
     
   }
 

@@ -44,7 +44,9 @@ export class ProdutoComponent implements OnInit {
           const usuario ={
             nomeProduto: item.nome,
             descricao: item.descricao,
-            quantidade: item.quantidade
+            quantidade: item.quantidade,
+            isEditable:true,
+            isDeletable:true,
           }
           items.push(usuario)
         }
@@ -77,8 +79,8 @@ export class ProdutoComponent implements OnInit {
       }
       
     ], 'id');
-    // this.cabecalhoTabela.isEditable = false;
-    // this.cabecalhoTabela.isDeletable = false;
+    this.cabecalhoTabela.isEditable = false;
+    this.cabecalhoTabela.isDeletable = false;
   }
 
   cadastrar(): void{

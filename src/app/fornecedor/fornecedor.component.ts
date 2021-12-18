@@ -45,6 +45,8 @@ export class FornecedorComponent implements OnInit {
             NomeDoFornecedor: item.nomeFornecedor,
             CNPJ: item.cnpj,
             inscricaoEstadual: item.inscricaoEstadual,
+            isEditable:true,
+            isDeletable:true,
           }
           items.push(usuario)
         }
@@ -81,8 +83,8 @@ export class FornecedorComponent implements OnInit {
       }
       
     ], 'id');
-    // this.cabecalhoTabela.isEditable = false;
-    // this.cabecalhoTabela.isDeletable = false;
+    this.cabecalhoTabela.isEditable = true;
+    this.cabecalhoTabela.isDeletable = true;
   }
 
   cadastrar(): void{
