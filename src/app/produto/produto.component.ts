@@ -42,6 +42,7 @@ export class ProdutoComponent implements OnInit {
       if(Array.isArray(data) && data.length){
         for (const item of data) {
           const usuario ={
+            id: item.id,
             nomeProduto: item.nome,
             descricao: item.descricao,
             quantidade: item.quantidade,

@@ -60,6 +60,7 @@ export class CadastrarComponent implements OnInit {
       if(Array.isArray(data) && data.length){
         for (const item of data) {
           const usuario ={
+            id: item.id,
             Nome: item.nome,
             Sobrenome: item.sobrenome,
             Usuario: item.usuario,

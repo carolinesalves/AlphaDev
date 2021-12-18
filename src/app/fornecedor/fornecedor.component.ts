@@ -42,6 +42,7 @@ export class FornecedorComponent implements OnInit {
       if(Array.isArray(data) && data.length){
         for (const item of data) {
           const usuario ={
+            id: item.id,
             NomeDoFornecedor: item.nomeFornecedor,
             CNPJ: item.cnpj,
             inscricaoEstadual: item.inscricaoEstadual,

@@ -212,11 +212,10 @@ export class HomeComponent implements OnInit {
     });
     // console.log('produtosSugerir',produtosSugerir)
 
-    let cont=0;
     produtosSugerir.forEach((item, index) =>{
       if(item.sugerir){
         const produto :IExibirSugestao={
-          id: cont=+1,
+          id: index+1,
           nome: item.nome,
           quantidade: String(item.comprar),
           unidadeMedida: item.unidadeMedida ? item.unidadeMedida : '',
