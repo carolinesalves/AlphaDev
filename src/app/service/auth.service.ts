@@ -95,6 +95,12 @@ export class AuthService {
   cadastrar(user: User): Observable<User>{
     return this.http.post<User>(`${API}/usuarios`, user)
   }
+  atualizar(id:string, user: User): Observable<User>{
+    return this.http.patch<User>(`${API}/usuarios/${id}`, user)
+  }
+  excluir(id:string): Observable<User>{
+    return this.http.delete<User>(`${API}/usuarios/${id}`)
+  }
   buscarTodosUsuarios(): Observable<User>{
     return this.http.get<User>(`${API}/usuarios`,)
   }

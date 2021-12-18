@@ -25,7 +25,7 @@ export class HomeComponent implements OnInit {
   produtosEstoque:IEstoque[] =[]
   registroDeProdutos:IRegistro[] =[]
   produtos: {id:number, nome:string, quantidade:string, unidadeMedida:string}[]=[]
-  
+  count = 0;
 
   constructor(private registroService: RegistroService,
     private estoqueService : EstoqueService,
@@ -215,7 +215,7 @@ export class HomeComponent implements OnInit {
     produtosSugerir.forEach((item, index) =>{
       if(item.sugerir){
         const produto :IExibirSugestao={
-          id: index+1,
+          id: this.count+=1,
           nome: item.nome,
           quantidade: String(item.comprar),
           unidadeMedida: item.unidadeMedida ? item.unidadeMedida : '',

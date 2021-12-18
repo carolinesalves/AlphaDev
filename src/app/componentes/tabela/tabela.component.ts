@@ -82,7 +82,7 @@ export class TabelaComponent implements OnInit{
   @Input() filters: Actions<any>[] = [];
   @Input() config: DataTableConfig;
   @Input() data: DataTableItem[];
-  @Input() perPage = 10000;
+  @Input() perPage = 10;
   @Input() page = 1;
   // @Input() name: string;
   @Input() btnName = 'Adicionar';
