@@ -38,6 +38,7 @@ export class CadastrarComponent implements OnInit {
   dadosTabela: DataTableItem[];
   editar = false;
   id : any = null;
+  nameUser : any = null;
 
   constructor(
     private authService: AuthService,
@@ -98,7 +99,7 @@ export class CadastrarComponent implements OnInit {
       },
       {
         var: 'Usuario',
-        label: 'Usuario',
+        label: 'Usuário',
         type: 'text'
       }
       
@@ -130,17 +131,17 @@ export class CadastrarComponent implements OnInit {
       if(!this.editar){
         this.authService.cadastrar(body).subscribe((resp: IUser) => {
           this.alert.success('Usuário cadastrado com sucesso!',)
-          this.formUsuario.reset();
           this.carregarTabela();
+          this.novoCadastro();
         }, error =>{
           console.warn('error', error)
           this.alert.error('Tente novamente','Falha')
         })
       }else{
         this.authService.atualizar(this.id,body).subscribe((resp: IUser) => {
-          this.alert.success('Cadastrado atualizado com sucesso!',)
-          this.formUsuario.reset();
+          this.alert.success('Cadastro atualizado com sucesso!',)
           this.carregarTabela();
+          this.novoCadastro();
         }, error =>{
           console.warn('error', error)
           this.alert.error('Tente novamente','Falha')
@@ -161,6 +162,7 @@ export class CadastrarComponent implements OnInit {
   async apagarCadastro(event: any):Promise<void>{
     console.log('apagarCadastro',event)
     this.id = event.id;
+    this.nameUser = event.Usuario;
     const { value: response } = await this.confirmarExclusao();
     if (response) {
       this.alert.success('Cadastrado excluído com sucesso!',)
@@ -170,11 +172,11 @@ export class CadastrarComponent implements OnInit {
 
   async confirmarExclusao():Promise<SweetAlertResult>{
     return await Swal.fire({
-      title: 'Excluir cadastro',
+      title: `Confirma a exclusão do usuário ${this.nameUser}`,
       icon:'warning',
       showCancelButton: true,
       focusCancel: true,
-      width: 1000,
+      // width: 1000,
       preConfirm: () =>{
         this.excluir();
       },

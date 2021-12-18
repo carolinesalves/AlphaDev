@@ -4,6 +4,7 @@ import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import { IProduto } from '../model/Produto'
 import { ProdutoService } from '../service/produto.service'
 import { DataTableConfig, DataTableItem } from '../componentes/tabela/tabela.component';
+import Swal, { SweetAlertResult } from 'sweetalert2';
 
 @Component({
   selector: 'app-produto',
@@ -20,6 +21,10 @@ export class ProdutoComponent implements OnInit {
 
   cabecalhoTabela: DataTableConfig;
   dadosTabela: DataTableItem[];
+
+  editar = false;
+  id : any = null;
+  name : any = null;
 
   constructor(
     private fb: FormBuilder,
@@ -84,6 +89,12 @@ export class ProdutoComponent implements OnInit {
     this.cabecalhoTabela.isDeletable = true;
   }
 
+  novoCadastro():void{
+    this.editar = false;
+    this.id = null;
+    this.formProduto.reset();
+  }
+
   cadastrar(): void{
     const body:IProduto  = Object.assign({}, this.formProduto.value)
     const quantidadeZero = body.quantidade === 0 ? true : false;
@@ -92,20 +103,67 @@ export class ProdutoComponent implements OnInit {
       this.alert.warning('Quantidade zero ou negativo','Falha')
       return;
     }
-    this.produtoService.cadastrar(body).subscribe((data:IProduto)=>{
-      this.formProduto.reset()
-      this.alert.success('Produto Cadastrado','Sucesso!')
-    }, error =>{
-      console.warn('error', error)
-      this.alert.error('Tente novamente','Falha')
-    })
+    if(!this.editar){
+      this.produtoService.cadastrar(body).subscribe((data:IProduto)=>{
+        this.alert.success('Produto Cadastrado','Sucesso!')
+        this.carregarTabela();
+        this.novoCadastro();
+      }, error =>{
+        console.warn('error', error)
+        this.alert.error('Tente novamente','Falha')
+      })
+    }else{
+      this.produtoService.atualizar(this.id,body).subscribe((data:IProduto)=>{
+        this.alert.success('Cadastro atualizado com sucesso!',)
+        this.carregarTabela();
+        this.novoCadastro();
+      }, error =>{
+        console.warn('error', error)
+        this.alert.error('Tente novamente','Falha')
+      })
+    }
   }
 
-  editarCadastro(event: Event):void{
+  editarCadastro(event: any):void{
     console.log('editarCadastro',event )
+    this.editar = true;
+    this.id = event.id;
+    this.formProduto.get('nome')?.setValue(event.nomeProduto)
+    this.formProduto.get('descricao')?.setValue(event.descricao)
+    this.formProduto.get('quantidade')?.setValue(event.quantidade)
   }
 
-  apagarCadastro(event: Event):void{
+  async apagarCadastro(event: any):Promise<void>{
     console.log('apagarCadastro',event)
+    this.id = event.id;
+    this.name = event.nomeProduto;
+    const { value: response } = await this.confirmarExclusao();
+    if (response) {
+      this.alert.success('Cadastrado excluído com sucesso!',)
+    }
+    return;
   }
+
+  async confirmarExclusao():Promise<SweetAlertResult>{
+    return await Swal.fire({
+      title: `Confirma a exclusão do produto ${this.name}`,
+      icon:'warning',
+      showCancelButton: true,
+      focusCancel: true,
+      // width: 1000,
+      preConfirm: () =>{
+        this.excluir();
+      },
+     });
+  }
+
+  excluir():void{
+    this.produtoService.excluir(this.id).subscribe((data)=>{
+      console.log('Excluir', data)
+    },error =>{
+      this.alert.error('Por favor, atualize a página e tente novamente.', 'Erro!');
+      console.info('error =>',error);
+    });
+  }
+
 }

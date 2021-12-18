@@ -37,6 +37,7 @@
                         </div>
                         <div class="d-flex justify-content-center">
                             <button type="submit" class="btn btn-danger space" routerLink='/home'>Cancelar</button>
+                            <button type="submit" class="btn btn-warning space" (click)='novoCadastro()'>Novo Cadastro</button>
                             <button type="submit" class="btn btn-success space" (click)='cadastrar()' [disabled]="formFornecedor.invalid">Cadastrar</button>
                         </div>
 
