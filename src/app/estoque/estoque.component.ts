@@ -65,17 +65,17 @@ export class EstoqueComponent implements OnInit {
             const item ={
               id : e.id,
               descricaoProduto: produto?.nome || produto?.descricao,
-              quantidade: e.quantidade,
+              quantidade: e.quantidade || '0',
               unidadeMedida: e.unidadeMedida,
               qtdminima: produto.quantidade || '0'
             }
             produtosEstoque.push(item)
+            produtosEstoque.sort((a,b)=>{
+              return new Intl.Collator().compare(a.descricaoProduto, b.descricaoProduto);
+            });
+            this.dadosDosItens = DataTableItem.collection(produtosEstoque)
           })
         })
-        produtosEstoque.sort((a,b)=>{
-          return new Intl.Collator().compare(a.descricaoProduto, b.descricaoProduto);
-        });
-        this.dadosDosItens = DataTableItem.collection(produtosEstoque)
       }
     },error =>{
       console.warn('error', error)

@@ -53,8 +53,6 @@ export class HomeComponent implements OnInit {
     const mesPassado = moment(new Date()).subtract(1,'months').format();
 
     const respostaRegistro =  registros.reduce((acumulador, valorAtual, index, array)=>{
-      console.log('acumulador',acumulador)
-      console.log('valorAtual',valorAtual)
       acumulador.quantidade ? acumulador.quantidade : acumulador.quantidade = 0;
       valorAtual.quantidade ? valorAtual.quantidade : valorAtual.quantidade = 0;
       if(listaRegistro.length === 0){ // Se a lista estiver vazia
@@ -102,7 +100,7 @@ export class HomeComponent implements OnInit {
       return acumulador;
     })
     // console.log('respostaRegistro',respostaRegistro)
-    console.log('listaRegistro',listaRegistro)
+    // console.log('listaRegistro',listaRegistro)
     const contagemRegistro:IRegistro[] =[];
     listaRegistro.forEach((e,i)=>{
       const contador = e.quantidadeDatas || 0 
@@ -155,7 +153,7 @@ export class HomeComponent implements OnInit {
         return;
       }
     })
-    console.log('contagemRegistro', contagemRegistro)
+    // console.log('contagemRegistro', contagemRegistro)
     const produtosSugerir:IRegistro[]=[];
     // console.log('estoque', this.produtosEstoque)
     contagemRegistro.forEach(produtoAtual  => {
@@ -165,8 +163,8 @@ export class HomeComponent implements OnInit {
       if(existeProduto){
         const quantidadeEmEstoque = existeProduto.quantidade ? existeProduto.quantidade : 0;
         // console.log("produtoAtual.quantidadeParaComprar", produtoAtual.quantidadeParaComprar)
-        console.log("produtoAtual", produtoAtual)
-        console.log('existeProdutoEstoque' ,existeProduto)
+        // console.log("produtoAtual", produtoAtual)
+        // console.log('existeProdutoEstoque' ,existeProduto)
 
         // if(produtoAtual.quantidadeParaComprar < 1){
         //   if(quantidadeEmEstoque < produtoAtual.quantidadeMinimaEstoque){
@@ -191,7 +189,7 @@ export class HomeComponent implements OnInit {
         }
         if(quantidadeEmEstoque < produtoAtual.quantidadeMaximaEstoque){
           const diariaEmEstoque = Math.trunc(parseInt(String(quantidadeEmEstoque))/produtoAtual.mediaDiaria)
-          console.log('diariaEmEstoque', diariaEmEstoque)
+          // console.log('diariaEmEstoque', diariaEmEstoque)
           if( diariaEmEstoque < produtoAtual.periodoMaximo){
             produtoAtual.sugerir=true;
             produtoAtual.comprar = produtoAtual.quantidadeParaComprar
