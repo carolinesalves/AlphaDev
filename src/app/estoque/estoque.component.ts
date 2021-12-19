@@ -73,7 +73,9 @@ export class EstoqueComponent implements OnInit {
             produtosEstoque.sort((a,b)=>{
               return new Intl.Collator().compare(a.descricaoProduto, b.descricaoProduto);
             });
-            this.dadosDosItens = DataTableItem.collection(produtosEstoque)
+            setTimeout(() => {
+              this.dadosDosItens = DataTableItem.collection(produtosEstoque)
+            }, 2000);
           })
         })
       }
