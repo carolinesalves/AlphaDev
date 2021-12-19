@@ -106,54 +106,54 @@ export class CadastrarComponent implements OnInit {
     this.cabecalhoTabela.isEditable = true;
     this.cabecalhoTabela.isDeletable = true;
     
-    const dataTeste = [
-      {
-          id: 1,
-          usuario: "admin",
-          nome: "admin",
-          sobrenome: "admin"
-      },
-      {
-          id: 4,
-          usuario: "furia",
-          nome: "Fabio",
-          sobrenome: "Furia"
-      },
-      {
-          id: 5,
-          usuario: "mozart_alemão",
-          nome: "mozart da silva",
-          sobrenome: " da silva"
-      },
-      {
-          id: 6,
-          usuario: "thiago",
-          nome: "Thiago",
-          sobrenome: "Suyama"
-      },
-      {
-          id: 8,
-          usuario: "tese1",
-          nome: "teste1",
-          sobrenome: "test1"
-      }
-    ]
-    const itemsTeste =[]
-    for (const item of dataTeste) {
-      const usuario ={
-        id: item.id,
-        Nome: item.nome,
-        Sobrenome: item.sobrenome,
-        Usuario: item.usuario,
-        isEditable:true,
-        isDeletable:true,
-      }
-      itemsTeste.push(usuario)
-    }
-    itemsTeste.sort((a,b)=>{
-      return new Intl.Collator().compare(a.Nome, b.Nome);
-    });
-    this.dadosTabela = DataTableItem.collection(itemsTeste);
+    // const dataTeste = [
+    //   {
+    //       id: 1,
+    //       usuario: "admin",
+    //       nome: "admin",
+    //       sobrenome: "admin"
+    //   },
+    //   {
+    //       id: 4,
+    //       usuario: "furia",
+    //       nome: "Fabio",
+    //       sobrenome: "Furia"
+    //   },
+    //   {
+    //       id: 5,
+    //       usuario: "mozart_alemão",
+    //       nome: "mozart da silva",
+    //       sobrenome: " da silva"
+    //   },
+    //   {
+    //       id: 6,
+    //       usuario: "thiago",
+    //       nome: "Thiago",
+    //       sobrenome: "Suyama"
+    //   },
+    //   {
+    //       id: 8,
+    //       usuario: "tese1",
+    //       nome: "teste1",
+    //       sobrenome: "test1"
+    //   }
+    // ]
+    // const itemsTeste =[]
+    // for (const item of dataTeste) {
+    //   const usuario ={
+    //     id: item.id,
+    //     Nome: item.nome,
+    //     Sobrenome: item.sobrenome,
+    //     Usuario: item.usuario,
+    //     isEditable:true,
+    //     isDeletable:true,
+    //   }
+    //   itemsTeste.push(usuario)
+    // }
+    // itemsTeste.sort((a,b)=>{
+    //   return new Intl.Collator().compare(a.Nome, b.Nome);
+    // });
+    // this.dadosTabela = DataTableItem.collection(itemsTeste);
   }
 
   confirmeSenha() :boolean {
