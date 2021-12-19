@@ -230,7 +230,7 @@ export class HomeComponent implements OnInit {
         }
       })
       console.log('this.produtos',this.produtos)
-    }, 5000);
+    }, 2000);
     
   }
 
