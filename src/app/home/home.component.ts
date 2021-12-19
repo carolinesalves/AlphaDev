@@ -24,7 +24,7 @@ export class HomeComponent implements OnInit {
 
   produtosEstoque:IEstoque[] =[]
   registroDeProdutos:IRegistro[] =[]
-  produtos: {id:number, nome:string, quantidade:string, unidadeMedida:string}[]=[]
+  produtos: {id:number, nome:string, quantidade?:string, unidadeMedida:string}[]=[]
   count = 0;
 
   constructor(private registroService: RegistroService,
@@ -55,6 +55,8 @@ export class HomeComponent implements OnInit {
     const respostaRegistro =  registros.reduce((acumulador, valorAtual, index, array)=>{
       acumulador.quantidade ?? 0;
       valorAtual.quantidade ?? 0;
+      console.log(' acumulador.quantidade ',  acumulador.quantidade )
+      console.log('valorAtual.quantidade', valorAtual.quantidade)
       if(listaRegistro.length === 0){ // Se a lista estiver vazia
         acumulador.contador=1;
         acumulador.datasAcumuladas=[];
@@ -226,7 +228,7 @@ export class HomeComponent implements OnInit {
         this.produtos.push(produto)
       }
     })
-    // console.log('this.produtos',this.produtos)
+    console.log('this.produtos',this.produtos)
     
   }
 
