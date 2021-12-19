@@ -100,7 +100,7 @@ export class HomeComponent implements OnInit {
       return acumulador;
     })
     // console.log('respostaRegistro',respostaRegistro)
-    // console.log('listaRegistro',listaRegistro)
+    console.log('listaRegistro',listaRegistro)
     const contagemRegistro:IRegistro[] =[];
     listaRegistro.forEach((e,i)=>{
       const contador = e.quantidadeDatas || 0 
@@ -153,7 +153,7 @@ export class HomeComponent implements OnInit {
         return;
       }
     })
-    // console.log('contagemRegistro', contagemRegistro)
+    console.log('contagemRegistro', contagemRegistro)
     const produtosSugerir:IRegistro[]=[];
     // console.log('estoque', this.produtosEstoque)
     contagemRegistro.forEach(produtoAtual  => {

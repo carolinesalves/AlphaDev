@@ -70,10 +70,12 @@ export class EstoqueComponent implements OnInit {
               qtdminima: produto.quantidade || '0'
             }
             produtosEstoque.push(item)
-            // console.log('lista de produtos ', produtosEstoque)
-            this.dadosDosItens = DataTableItem.collection(produtosEstoque)
           })
         })
+        produtosEstoque.sort((a,b)=>{
+          return new Intl.Collator().compare(a.descricaoProduto, b.descricaoProduto);
+        });
+        this.dadosDosItens = DataTableItem.collection(produtosEstoque)
       }
     },error =>{
       console.warn('error', error)
