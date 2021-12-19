@@ -53,8 +53,10 @@ export class HomeComponent implements OnInit {
     const mesPassado = moment(new Date()).subtract(1,'months').format();
 
     const respostaRegistro =  registros.reduce((acumulador, valorAtual, index, array)=>{
-      acumulador.quantidade || 0;
-      valorAtual.quantidade || 0;
+      console.log('acumulador',acumulador)
+      console.log('valorAtual',valorAtual)
+      acumulador.quantidade ? acumulador.quantidade : acumulador.quantidade = 0;
+      valorAtual.quantidade ? valorAtual.quantidade : valorAtual.quantidade = 0;
       if(listaRegistro.length === 0){ // Se a lista estiver vazia
         acumulador.contador=1;
         acumulador.datasAcumuladas=[];
