@@ -55,8 +55,8 @@ export class HomeComponent implements OnInit {
     const respostaRegistro =  registros.reduce((acumulador, valorAtual, index, array)=>{
       acumulador.quantidade ?? 0;
       valorAtual.quantidade ?? 0;
-      console.log(' acumulador.quantidade ',  acumulador.quantidade )
-      console.log('valorAtual.quantidade', valorAtual.quantidade)
+      // console.log(' acumulador.quantidade ',  acumulador.quantidade )
+      // console.log('valorAtual.quantidade', valorAtual.quantidade)
       if(listaRegistro.length === 0){ // Se a lista estiver vazia
         acumulador.contador=1;
         acumulador.datasAcumuladas=[];
@@ -248,6 +248,7 @@ export class HomeComponent implements OnInit {
             this.produtosEstoque.push(item)
           })
         })
+        console.log('produtosEstoque', this.produtosEstoque)
       }
     },error =>{
       console.warn('error', error)
