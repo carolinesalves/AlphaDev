@@ -70,6 +70,7 @@ export class SaidaComponent implements OnInit {
 
   buscarTodosProdutos(){
     this.produtoService.buscarTodosProdutos().subscribe((data)=>{
+      const listaProduto:any =[];
       if(data.length){
         data.forEach(produto => {
           if(produto && produto.nome){
@@ -77,10 +78,13 @@ export class SaidaComponent implements OnInit {
               id: produto.id,
               text: produto.nome
             }
-            this.listaProduto.push(lista);
+            listaProduto.push(lista);
           }
         })
-
+        listaProduto.sort((a:any,b:any)=>{
+          return new Intl.Collator().compare(a.text, b.text);
+        });
+        this.listaProduto= listaProduto;
       }
     }, error =>{
       console.warn('error', error)

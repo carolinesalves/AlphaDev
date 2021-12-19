@@ -165,6 +165,8 @@ export class ProdutoComponent implements OnInit {
       this.novoCadastro();
     },error =>{
       this.alert.error('Por favor, atualize a página e tente novamente.', 'Erro!');
+      this.carregarTabela();
+      this.novoCadastro();
       console.info('error =>',error);
     });
   }
