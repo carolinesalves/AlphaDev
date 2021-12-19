@@ -239,7 +239,7 @@ export class HomeComponent implements OnInit {
             const item: IEstoque ={
               id : e.id,
               descricaoProduto: produto?.nome || produto?.descricao,
-              quantidade: e.quantidade,
+              quantidade: e.quantidade || '0',
               unidadeMedida: e.unidadeMedida,
               qtdminima: produto.quantidade || '0'
             }
