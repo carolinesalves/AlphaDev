@@ -53,8 +53,8 @@ export class HomeComponent implements OnInit {
     const mesPassado = moment(new Date()).subtract(1,'months').format();
 
     const respostaRegistro =  registros.reduce((acumulador, valorAtual, index, array)=>{
-      acumulador.quantidade ? acumulador.quantidade : acumulador.quantidade = 0;
-      valorAtual.quantidade ? valorAtual.quantidade : valorAtual.quantidade = 0;
+      acumulador.quantidade ?? 0;
+      valorAtual.quantidade ?? 0;
       if(listaRegistro.length === 0){ // Se a lista estiver vazia
         acumulador.contador=1;
         acumulador.datasAcumuladas=[];
@@ -62,7 +62,7 @@ export class HomeComponent implements OnInit {
         if(moment(dataAtual).isSameOrAfter(mesPassado) && moment(dataAtual).isSameOrBefore(hoje)){
           const adicionarData= moment(acumulador.dataRetirada).format('DD/MM/YYYY')
           acumulador.datasAcumuladas.push(adicionarData)
-          acumulador.quantidadeAcumuladas= acumulador.quantidade || 0;
+          acumulador.quantidadeAcumuladas= acumulador.quantidade ?? 0;
           acumulador.quantidadeDatas=1;
           listaRegistro.push(acumulador);
         }
@@ -161,7 +161,7 @@ export class HomeComponent implements OnInit {
       const existeProduto = this.produtosEstoque.find(e => e.descricaoProduto === produtoAtual.nome)
       // console.log('existeProduto' ,existeProduto)
       if(existeProduto){
-        const quantidadeEmEstoque = existeProduto.quantidade ? existeProduto.quantidade : 0;
+        const quantidadeEmEstoque = existeProduto.quantidade ?? 0;
         // console.log("produtoAtual.quantidadeParaComprar", produtoAtual.quantidadeParaComprar)
         // console.log("produtoAtual", produtoAtual)
         // console.log('existeProdutoEstoque' ,existeProduto)
@@ -239,9 +239,9 @@ export class HomeComponent implements OnInit {
             const item: IEstoque ={
               id : e.id,
               descricaoProduto: produto?.nome || produto?.descricao,
-              quantidade: e.quantidade || '0',
+              quantidade: e.quantidade ?? 0,
               unidadeMedida: e.unidadeMedida,
-              qtdminima: produto.quantidade || '0'
+              qtdminima: produto.quantidade ?? 0,
             }
             this.produtosEstoque.push(item)
           })
