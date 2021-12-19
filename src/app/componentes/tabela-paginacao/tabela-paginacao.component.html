@@ -1,0 +1,19 @@
+<div class="row">
+  <div class="col-md-2 d-none d-md-block">
+    <button #back type="button" class="btn btn-link" (click)="page=page>1?page-1:1;pageChange.emit(page)">Voltar</button>
+  </div>
+  <div class="col-md-8">
+    <ngb-pagination class="d-flex justify-content-center"
+                    [directionLinks]="false"
+                    [collectionSize]="collectionSize"
+                    [pageSize]="perPage"
+                    [maxSize]="8"
+                    [page]="page"
+                    (pageChange)="pageChange.emit($event)">
+
+    </ngb-pagination>
+  </div>
+  <div class="col-md-2 d-none d-md-block">
+    <button #next type="button" class="btn btn-link float-right" (click)="page=page<collectionSize/perPage?page+1:page;pageChange.emit(page)">Avançar</button>
+  </div>
+</div>

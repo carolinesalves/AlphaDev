@@ -31,6 +31,7 @@ import { MatFormFieldModule } from "@angular/material/form-field";
 import { InputFieldComponent } from './componentes/input-field/input-field.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+import { TabelaPaginacaoComponent } from './componentes/tabela-paginacao/tabela-paginacao.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -45,6 +46,7 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
     TabelaComponent,
     EstoqueComponent,
     InputFieldComponent,
+    TabelaPaginacaoComponent,
   ],
   imports: [
     BrowserModule,

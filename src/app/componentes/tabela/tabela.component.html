@@ -46,5 +46,6 @@
               </tr>
           </tbody>
       </table>
-  </form>
+    </form>
+    <app-tabela-paginacao class="card-footer" [collectionSize]="items_filtered?.length || 0" [(page)]="page" (pageChange)="pageChange.emit($event)" [perPage]="perPage"></app-tabela-paginacao>
 </div>
