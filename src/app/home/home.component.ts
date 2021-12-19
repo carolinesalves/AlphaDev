@@ -38,6 +38,7 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.buscarEstoque();
     this.registroService.receberRegistro().subscribe((registros)=>{
+      console.log('registros', registros)
       setTimeout(() => {
         this.sugerirCompra(registros);
       }, 500);
@@ -52,6 +53,8 @@ export class HomeComponent implements OnInit {
     const mesPassado = moment(new Date()).subtract(1,'months').format();
 
     const respostaRegistro =  registros.reduce((acumulador, valorAtual, index, array)=>{
+      acumulador.quantidade || 0;
+      valorAtual.quantidade || 0;
       if(listaRegistro.length === 0){ // Se a lista estiver vazia
         acumulador.contador=1;
         acumulador.datasAcumuladas=[];
@@ -59,7 +62,7 @@ export class HomeComponent implements OnInit {
         if(moment(dataAtual).isSameOrAfter(mesPassado) && moment(dataAtual).isSameOrBefore(hoje)){
           const adicionarData= moment(acumulador.dataRetirada).format('DD/MM/YYYY')
           acumulador.datasAcumuladas.push(adicionarData)
-          acumulador.quantidadeAcumuladas= acumulador.quantidade
+          acumulador.quantidadeAcumuladas= acumulador.quantidade || 0;
           acumulador.quantidadeDatas=1;
           listaRegistro.push(acumulador);
         }
