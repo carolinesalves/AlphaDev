@@ -32,7 +32,6 @@ export class HomeComponent implements OnInit {
     private produtoService : ProdutoService,
     private alert : ToastrService,
 
-
     ) { }
 
   ngOnInit(): void {
@@ -40,6 +39,9 @@ export class HomeComponent implements OnInit {
     this.registroService.receberRegistro().subscribe((registros)=>{
       console.log('registros', registros)
       this.sugerirCompra(registros);
+    },error =>{
+      console.warn('error', error)
+      this.alert.error('Tente novamente','Falha')
     })
   }
 
@@ -228,7 +230,7 @@ export class HomeComponent implements OnInit {
         }
       })
       console.log('this.produtos',this.produtos)
-    }, 2000);
+    }, 5000);
     
   }
 

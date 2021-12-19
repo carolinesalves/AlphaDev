@@ -65,9 +65,9 @@ export class EstoqueComponent implements OnInit {
             const item ={
               id : e.id,
               descricaoProduto: produto?.nome || produto?.descricao,
-              quantidade: e.quantidade ?? '0',
+              quantidade: e.quantidade || '0',
               unidadeMedida: e.unidadeMedida,
-              qtdminima: produto.quantidade ?? '0'
+              qtdminima: produto.quantidade || '0'
             }
             produtosEstoque.push(item)
             produtosEstoque.sort((a,b)=>{
